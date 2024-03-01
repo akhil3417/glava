@@ -80,6 +80,14 @@ async def ask_for_input(user_input):
     user_input = get_transcript()
     return user_input
 
+def generate_response(user_input):
+    try:
+        command = get_command(user_input)
+        t = threading.Thread(target=start_process, args=(command,True))
+        t.start()
+    except Exception as e:
+        print("An error occurred in handle_command:", e)
+
 def start_process(cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
     try:
     # print(f"Executing command: {cmd}")
