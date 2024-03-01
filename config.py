@@ -56,3 +56,15 @@ STARTUP_MESSAGES = [
 
 # countries=["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
 COUNTRY="in"
+SITES = {
+    "def_search_engine":"https://lite.duckduckgo.com/lite/?q={user_input}&kf=-1&kz=-1&kq=-1&kv=-1&k1=-1&kp=-2&kaf=1&kd=-1",
+    "youtube":"http://www.youtube.com/results?aq=f&oq=&search_query={user_input}",
+    "invidious":"https://invidious.garudalinux.org/search?q={user_input}",
+    "github":"https://github.com/search?ref=simplesearch&q={user_input}",
+    "google_map":"https://www.google.com/maps/search/{user_input}/",
+    "wikipedia":"http://www.wikipedia.org/search-redirect.php?language=en&go=Go&search={user_input}",
+    "reddit":"https://www.reddit.com/search/?q={user_input}",
+    "amazon":"https://www.amazon.in/s?k={user_input}",
+    "stackoverflow":"https://stackoverflow.com/search?q={user_input}",
+    "google":"http://www.google.com/search?hl=en&ie=utf-8&oe=utf-8&q={user_input}"
+    }
