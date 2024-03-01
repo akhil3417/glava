@@ -54,3 +54,12 @@ def toggle_piper_http_server_command():
     else:
         PIPER_HTTP_SERVER = True
         start_piper_tts_service()  # Start the PIPER_HTTP_SERVER
+
+def toggle_vosk_websocket_server_command():
+    global VOSK_WEBSOCKET_SERVER
+    if VOSK_WEBSOCKET_SERVER:
+        VOSK_WEBSOCKET_SERVER = False
+        kill_vosk()
+    else:
+        VOSK_WEBSOCKET_SERVER = True
+        start_piper_tts_service()  # Start the VOSK_WEBSOCKET_SERVER
