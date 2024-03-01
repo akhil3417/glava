@@ -33,6 +33,7 @@ SPEAKER_IDS = {
 
 PIPER_EXECUTABLE = os.path.join(os.path.abspath(os.path.join(BASE_DIR, 'extensions/piper/')), 'piper')
 voice_model = VOICE_MODELS.get('2')
+
 IS_RANDOM_VOICE=False
 IS_LISTENING = False
 SCREEN_PRINT=True

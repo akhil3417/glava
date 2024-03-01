@@ -4,6 +4,8 @@ import subprocess
 import threading
 
 from .input_output import send_notification, speak_or_print, start_process
+
+
 def is_command_safe(cmd):
     unsafe_patterns = [
         r'rm\s+-[rRf]',  # Remove command
@@ -33,4 +35,5 @@ def run_command(user_input):
 def term_sgpt(user_input):
     t = threading.Thread(target=run_command, args=(user_input,))
     t.start()
+
 

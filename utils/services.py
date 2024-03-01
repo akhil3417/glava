@@ -31,6 +31,8 @@ def kill_vosk():
         kill_process(pid)
     print(f"Killed Vosk Websocket Server with Pids {pids}")
 
+
+
 def start_vosk_service_command():
     command = f"python3 {VOSK_WEBSOCKET_SCRIPT} -m {VOSK_MODELS_DIR}{VOSK_MODEL}/"
     print(f"Starting Vosk Websocket Server on Port 2700 with Default model")
