@@ -70,6 +70,16 @@ def get_transcript():
         logging.error("Transcript file not found")
         return ""
 
+async def ask_for_input(user_input):
+    # Run listen function in the background
+    global listen_task
+    listen_task = await start_listening('ws://localhost:2700', True)
+    # Wait for listen task to complete
+    await listen_task
+    # Get user input
+    user_input = get_transcript()
+    return user_input
+
 def start_process(cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
     try:
     # print(f"Executing command: {cmd}")
