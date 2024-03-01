@@ -115,3 +115,26 @@ async def voice_sgpt(IS_LISTENING):
         user_input = get_transcript()
         await handle_command(user_input)
 
+
+async def interactive_sgpt():
+    while True:
+        user_input = input(">>\n")
+        if user_input.lower() == 'q':
+            break
+        elif user_input.lower() == 'v':
+            print("Listening")
+            try:
+                await voice_sgpt(IS_LISTENING)
+            except Exception as e:
+                print("An error occurred in voice_sgpt:", e)
+        else:
+            try:
+                await handle_command(user_input)
+            except TypeError:
+                pass
+            except Exception as e:
+                print("An error occurred in handle_command:", e)
+
+
+if __name__ == "__main__":
+    asyncio.run(interactive_sgpt())
