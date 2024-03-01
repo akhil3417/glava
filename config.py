@@ -40,6 +40,8 @@ VOSK_WEBSOCKET_SERVER=False
 VOSK_WEBSOCKET_SCRIPT=os.path.join(BASE_DIR,'scripts/vosk_rest_websocket.py')
 VOSK_MODELS_DIR=os.path.join(BASE_DIR,'extensions/vosk/')
 VOSK_MODEL="vosk-model-en-in-0.5"
+
+
 # BROWSER = "qutebrowser"
 # PROFILE = ""
 BROWSER = "firefox"
