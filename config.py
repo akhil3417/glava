@@ -46,3 +46,9 @@ BROWSER = "firefox"
 PROFILE = "-p KodachiBrowserLight"
 TERMINAL="st"
 
+STARTUP_MESSAGES = [
+    "Cool, Im on it sir.",
+    "Okay sir, Im working on it.",
+    "Just a second sir.",
+]
+
