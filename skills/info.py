@@ -2,8 +2,13 @@ import threading
 import urllib.request
 
 import imdb
+import requests
 import wikipedia
 import wolframalpha
+from bs4 import BeautifulSoup as bs
+from config import COUNTRY, NEWS_API_KEY
+from config import NEWS_HEADLINES_NUMBER as headlines
+from utils.input_output import speak_or_print, take_command
 
 def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
     try:
