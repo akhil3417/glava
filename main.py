@@ -69,6 +69,18 @@ greet_me(USER, HOSTNAME)
 # })
 # keyboard_listener.start()
 
+class Error(Exception):
+    """Base class for other exceptions"""
+    pass
+
+class VoiceInputError(Error):
+    """Raised when there's a problem with voice input"""
+    pass
+
+class CommandHandlingError(Error):
+    """Raised when there's a problem handling a command"""
+    pass
+
 async def handle_command(user_input):
     commands = {
         "term": term_sgpt,
@@ -110,30 +122,34 @@ async def handle_command(user_input):
     for command, func in commands.items():
         if command in user_input:
             user_input = user_input.replace(command, "").strip()
-            if "_command" in func.__name__ and  "_async" in func.__name__:
-                await func()
-                return
-            if "_command" in func.__name__:
-                func()
-                return
-            if "_async" in func.__name__:
-                await func(user_input)
-                # asyncio.run(func())
-                return
-            else:
-                func(user_input)
-            return
+            try:
+                if "_command" in func.__name__ and  "_async" in func.__name__:
+                    await func()
+                    return
+                if "_command" in func.__name__:
+                    func()
+                    return
+                if "_async" in func.__name__:
+                    await func(user_input)
+                    return
+                else:
+                    func(user_input)
+                    return
+            except Exception as e:
+                raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
 
     generate_response(user_input)
 
 async def voice_sgpt(IS_LISTENING):
     while True:
         IS_LISTENING = True
-        listen_task = await start_listening('ws://localhost:2700', IS_LISTENING)
-        await listen_task
-        user_input = get_transcript()
-        await handle_command(user_input)
-
+        try:
+            listen_task = await start_listening('ws://localhost:2700', IS_LISTENING)
+            await listen_task
+            user_input = get_transcript()
+            await handle_command(user_input)
+        except Exception as e:
+            raise VoiceInputError("An error occurred in voice_sgpt:", e)
 
 async def interactive_sgpt():
     while True:
