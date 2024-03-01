@@ -34,6 +34,13 @@ args = parser.parse_args()
 # Get voice model from command-line arguments
 VOICE_MODEL = VOICE_MODELS[args.model]
 
+def ensure_piper_models():
+    for voice_model_key, voice_model_path in VOICE_MODELS.items():
+        if not os.path.exists(voice_model_path):
+            print(f"Voice model file not found at {voice_model_path}")
+ensure_piper_models()
+
+
 async def handle_command(user_input):
     commands = {
         "term": term_sgpt,
