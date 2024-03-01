@@ -25,6 +25,15 @@ from utils.input_output import (generate_response, get_transcript,
                                 toggle_is_listening_command,
                                 toggle_random_voice_command,
                                 toggle_voice_command,change_voice_model_command,toggle_piper_http_server_command,toggle_vosk_websocket_server_command)
+
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Interactive SGPT.')
+parser.add_argument('--model', type=str, default='2', help='Voice model to use')
+args = parser.parse_args()
+
+# Get voice model from command-line arguments
+VOICE_MODEL = VOICE_MODELS[args.model]
+
         "term": term_sgpt,
         "browser": open_browser_command,
         "wiki":wikipedia_command_async,
