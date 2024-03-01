@@ -6,11 +6,11 @@ import wave
 from pathlib import Path
 from typing import Any, Dict
 
+
 from flask import Flask, request
 
-from . import PiperVoice
-from .download import ensure_voice_exists, find_voice, get_voices
-
+from piper.voice import PiperVoice
+from piper.download import ensure_voice_exists, find_voice, get_voices
 _LOGGER = logging.getLogger()
 
 
