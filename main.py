@@ -41,6 +41,21 @@ def ensure_piper_models():
 ensure_piper_models()
 
 
+def get_time_of_day():
+    hour = datetime.now().hour
+    if (hour >= 6) and (hour < 12):
+        return "Good morning"
+    elif (hour >= 12) and (hour <= 16):
+        return "Good afternoon"
+    elif (hour >= 16) and (hour < 19):
+        return "Good evening"
+    else:
+        return "Hello"
+
+def greet_me(user, hostname):
+    time_of_day = get_time_of_day()
+    speak_or_print(f"{time_of_day} {user}. I am {hostname}. How may I assist you?")
+
 async def handle_command(user_input):
     commands = {
         "term": term_sgpt,
