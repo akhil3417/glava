@@ -27,3 +27,17 @@ def web_search(user_input):
     url = get_site_url('def_search_engine', user_input)
     open_in_browser(DEFAULT_BROWSER, url)
 
+def open_websites(user_input):
+    print(user_input)
+    # Extract URL from user_input
+    url = re.findall(r'(?<=)\S+', user_input)
+    if url:
+        url = url[0]
+        # If the URL doesn't start with 'http' or 'https', add 'https://' to the beginning
+        if not re.match('(?:http|https)://', url):
+            url = 'https://' + url
+        # Open URL in default web browser
+        print(f"Opening {url}")
+        print(DEFAULT_BROWSER)
+        open_in_browser(DEFAULT_BROWSER, url)
+
