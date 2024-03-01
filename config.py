@@ -32,6 +32,12 @@ SPEAKER_IDS = {
 }
 
 PIPER_EXECUTABLE = os.path.join(os.path.abspath(os.path.join(BASE_DIR, 'extensions/piper/')), 'piper')
+voice_model = VOICE_MODELS.get('2')
+IS_RANDOM_VOICE=False
+IS_LISTENING = False
+SCREEN_PRINT=True
+
+VOICE = True
 PIPER_HTTP_SERVER=False
 PIPER_HTTP_SERVER_SCRIPT=os.path.abspath(os.path.join(BASE_DIR, 'scripts/piper_websocket_server.py'))
 PIPER_SCRIPT_ARGS = f"--sentence_silence 0.2 --noise_scale 0.333 --noise_w 0.333 --length_scale 1.3 -m {voice_model}"
