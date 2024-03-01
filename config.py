@@ -54,6 +54,13 @@ STARTUP_MESSAGES = [
     "Just a second sir.",
 ]
 
+def get_sgpt_args():
+    return "--top-p '0.01' --temperature '0.32' --no-cache --chat jarvis"
+
+def get_jarvis_prompt():
+    return "answer in less than 100 words , be consise ,clear , informative and dont point out spelling mistaks from the user: "
+    # return "provide concise ,clear info , focusing only on the necessary information and not including any unnecessary information such as greetings or spelling mistakes from the user: "
+
 # countries=["ae","ar","at","au","be","bg","br","ca","ch","cn","co","cu","cz","de","eg","fr","gb","gr","hk","hu","id","ie","il","in","it","jp","kr","lt","lv","ma","mx","my","ng","nl","no","nz","ph","pl","pt","ro","rs","ru","sa","se","sg","si","sk","th","tr","tw","ua","us","ve","za"]
 COUNTRY="in"
 SITES = {
