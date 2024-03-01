@@ -43,5 +43,23 @@ async def handle_command(user_input):
         "alpha": what_is_wolframe,
         # "movie": movie_command,
     }
+
+    for command, func in commands.items():
+        if command in user_input:
+            user_input = user_input.replace(command, "").strip()
+            if "_command" in func.__name__ and  "_async" in func.__name__:
+                await func()
+                return
+            if "_command" in func.__name__:
+                func()
+                return
+            if "_async" in func.__name__:
+                await func(user_input)
+                # asyncio.run(func())
+                return
+            else:
+                func(user_input)
+            return
+
     generate_response(user_input)
 
