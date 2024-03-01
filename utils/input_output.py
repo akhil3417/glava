@@ -22,6 +22,11 @@ def toggle_random_voice_command():
     IS_RANDOM_VOICE = not IS_RANDOM_VOICE
     print(f"Random voice status: {IS_RANDOM_VOICE}")
 
+def toggle_voice_command():
+    global global_voice
+    global_voice = not global_voice
+    print(f"Voice status: {global_voice}")
+
 def speaker_ids(voice_model):
     voice_model = os.path.basename(voice_model)  # Strip the path from the voice_model value
     if voice_model in SPEAKER_IDS:
