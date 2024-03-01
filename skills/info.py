@@ -3,6 +3,7 @@ import urllib.request
 
 import imdb
 import wikipedia
+import wolframalpha
 def search_on_wikipedia(query):
     try:
         results = wikipedia.summary(query, sentences=3)
@@ -44,3 +45,29 @@ def movie_command():
               f"The plot summary of movie is {plot}")
 
 
+
+def what_is_wolframe(user_input):
+    app_id = "KTKV36-2LRW2LELV8"
+    client = wolframalpha.Client(app_id)
+    # user_input=input("Enter:")
+    # user_input= await take_command()
+    try:
+        ind = user_input.lower().index('what is') if 'what is' in user_input.lower() else \
+            user_input.lower().index('who is') if 'who is' in user_input.lower() else \
+                user_input.lower().index('which is') if 'which is' in user_input.lower() else None
+
+        if ind is not None:
+            text = user_input.split()[ind + 2:]
+            res = client.query(" ".join(text))
+            ans = next(res.results).text
+            speak_or_print("The answer is " + ans)
+            print("The answer is " + ans)
+        else:
+            speak_or_print("I couldn't find that. Please try again.")
+    except StopIteration:
+        speak_or_print("I couldn't find that. Please try again.")
+
+
+def run_wolframe(user_input):
+    t = threading.Thread(target=what_is_wolframe, args=(user_input,))
+    t.start()
