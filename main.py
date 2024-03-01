@@ -46,6 +46,9 @@ async def handle_command(user_input):
         "wiki":wikipedia_command_async,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
+#linux
+        "ip address": ip_address_command_async,
+        "new shell": open_new_shell_command,
 #music
         "dream": run_stream_async,
         "play": play_song,
