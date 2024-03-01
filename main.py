@@ -46,7 +46,11 @@ async def handle_command(user_input):
         "wiki":wikipedia_command_async,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
+#music
+        "dream": run_stream_async,
+        "play": play_song,
         # "movie": movie_command,
+        # "send an email": send_email_command,
 
 #assistant controls
         "modelv": change_voice_model_command,
