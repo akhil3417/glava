@@ -62,6 +62,15 @@ def speak_or_print(text, VOICE=None, json_input=False):
             pass
     else:
         print(text)
+
+
+def speak(text, json_input=False):
+    command = get_audio_stream(json_input)
+    try:
+        subprocess.run(command, shell=True, check=True, input=text, text=True)
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Error running command: {command}. Error: {e}")
+
 def get_transcript():
     try:
         with open("/tmp/transcript.txt", "r") as f:
