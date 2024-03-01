@@ -29,6 +29,7 @@ from utils.input_output import (generate_response, get_transcript,
 from rich import print as rich_print
 from rich.rule import Rule
 from rich.prompt import Prompt
+import typer
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Interactive SGPT.')
 parser.add_argument('--model', type=str, default='2', help='Voice model to use')
@@ -155,6 +156,7 @@ async def interactive_sgpt():
     while True:
         user_input = input(">>\n")
         if user_input.lower() == 'q':
+        user_input = typer.prompt(">>>", prompt_suffix=" ")
             break
         elif user_input.lower() == 'v':
             print("Listening")
