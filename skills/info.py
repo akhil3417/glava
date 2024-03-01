@@ -45,6 +45,20 @@ def movie_command():
               f"The plot summary of movie is {plot}")
 
 
+def calculate_command():
+    app_id = "KTKV36-2LRW2LELV8"
+    client = wolframalpha.Client(app_id)
+    user_input=input("enter")
+    ind = user_input.lower().split().index("calculate")
+    text = user_input.split()[ind + 1:]
+    result = client.query(" ".join(text))
+    try:
+        ans = next(result.results).text
+        speak_or_print("The answer is " + ans)
+        print("The answer is " + ans)
+    except StopIteration:
+        speak_or_print("I couldn't find that . Please try again")
+
 
 def what_is_wolframe(user_input):
     app_id = "KTKV36-2LRW2LELV8"
