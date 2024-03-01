@@ -18,3 +18,24 @@ def play_song_and_write_transcript(song_to_play):
     # Run music script
     subprocess.run([script, song_to_play], check=True)
 
+# def play_command(user_input , script='/home/shiva/gitclones/jarvis-repos/linux-assistant/skills/yt.py'):
+def play_song(user_input):
+    play_song_and_write_transcript(user_input)
+
+async def stream_with_listen(user_input):
+    song_to_play = await ask_for_input('What do you want to play?')
+    play_song_and_write_transcript(song_to_play)
+
+def stream_without_listen(user_input):
+    song_to_play = input('What do you want to play? ')
+    play_song_and_write_transcript(song_to_play)
+
+async def run_stream_async(user_input):
+    speak_or_print('What do you want to play? ')
+    query = await take_command()
+    print(f"Playing",query)
+    if IS_LISTENING:
+        await play_song_and_write_transcript(query)
+    else:
+        await play_song_and_write_transcript(query)
+
