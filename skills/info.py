@@ -61,6 +61,32 @@ def get_news(user_input):
     return news[:6]
 
 
+def read_news(user_input):
+    cmd = lambda text: print(text)  # Default command
+    if "google" in user_input:
+        google_news_command()
+        if "speak" in user_input:
+            google_news_command(VOICE=True)
+        return
+    articles = get_news(user_input)
+    if "speak" in user_input:
+        cmd=speak_or_print
+        for article in articles:
+            print(article["text"])
+            cmd((article["text"]),VOICE=True)
+            if "desc" in user_input:
+                print(article["description"])
+                cmd(article["description"],VOICE=True)
+        return
+    else:
+      for article in articles:
+          print(article["text"])
+          if "desc" in user_input:
+              print(article["description"])
+          if cmd != speak_or_print :
+              print("---------------------------------------------------------------------------------------")
+
+
 def search_on_wikipedia(query):
     try:
         results = wikipedia.summary(query, sentences=3)
