@@ -4,6 +4,26 @@ import urllib.request
 import imdb
 import wikipedia
 import wolframalpha
+
+def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
+    try:
+        news_url = "https://news.google.com/news/rss"
+        client = urllib.request.urlopen(news_url)
+        xml_page = client.read()
+        client.close()
+        soup = bs(xml_page, "xml")
+        news_list = soup.findAll("item")
+        response = ""
+        speak_or_print(f"Here are the top {headlines} headlines:")
+        for idx, news in enumerate(news_list[:headlines], start=1):
+            data = f"\n{idx}. {news.title.text}"
+            speak_or_print(data)
+            response += data
+    except Exception as e:
+            speak_or_print("Error with the execution of skill with message {0}".format(e))
+            speak_or_print("I can't find about daily news..")
+
+
 def search_on_wikipedia(query):
     try:
         results = wikipedia.summary(query, sentences=3)

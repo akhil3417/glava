@@ -65,6 +65,7 @@ async def handle_command(user_input):
         "search for": web_search,
         "query for":query_web_command_async,
         "youtube": open_youtube_browser_command_async,
+        "google news":google_news_command,
         "wiki":wikipedia_command_async,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
