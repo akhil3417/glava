@@ -63,3 +63,11 @@ async def handle_command(user_input):
 
     generate_response(user_input)
 
+async def voice_sgpt(IS_LISTENING):
+    while True:
+        IS_LISTENING = True
+        listen_task = await start_listening('ws://localhost:2700', IS_LISTENING)
+        await listen_task
+        user_input = get_transcript()
+        await handle_command(user_input)
+
