@@ -47,6 +47,16 @@ async def handle_command(user_input):
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
         # "movie": movie_command,
+
+#assistant controls
+        "modelv": change_voice_model_command,
+        "vcc": toggle_voice_command,
+        "tll": toggle_is_listening_command,
+        "rvt": toggle_random_voice_command,
+        "pipt": toggle_piper_http_server_command,
+        "voss": start_vosk_service_command,
+        "votss": toggle_vosk_websocket_server_command
+#
     }
 
     for command, func in commands.items():
