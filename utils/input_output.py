@@ -70,6 +70,25 @@ def get_transcript():
         logging.error("Transcript file not found")
         return ""
 
+async def input_without_listen(user_input):
+    user_input = await asyncio.to_thread(input, "Enter Query:")
+#     user_input = input("Enter:")
+    return user_input
+
+async def input_with_listen(user_input):
+    user_input = await ask_for_input("Listening:")
+    return user_input
+
+async def take_command():
+    user_input = None
+#     if IS_LISTENING is None:
+#         IS_LISTENING = global_listening
+    if IS_LISTENING:
+        user_input = await input_with_listen('Listening:')
+    else:
+        user_input = await input_without_listen('Enter: ')
+    return user_input
+
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
