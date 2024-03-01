@@ -139,6 +139,40 @@ def change_voice_model_command():
     else:
         print("Invalid choice. Please choose a number from the list.")
 
+def get_command(user_input):
+    sgpt_args = get_sgpt_args()
+    jarvis_user_input = get_jarvis_prompt()
+
+    if PIPER_HTTP_SERVER:
+        command = f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'| tee /dev/tty"
+        if global_voice and SCREEN_PRINT:
+           sgpt_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+           output = sgpt_process.communicate()[0].decode().strip().replace("'", "")
+           curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
+           start_process(curl_command, shell=True)
+           return
+        elif global_voice and not SCREEN_PRINT:
+           command = command.split('|')[0]
+           sgpt_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+           output = sgpt_process.communicate()[0].decode().strip().replace("'", "")
+           curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
+           start_process(curl_command, shell=True)
+           return
+        else:
+            start_process(command,shell=True)
+    else:
+       if global_voice and SCREEN_PRINT:
+           audio_stream = get_audio_stream()
+           return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}' | tee /dev/tty |{audio_stream} "
+       elif global_voice and not SCREEN_PRINT:
+           audio_stream = get_audio_stream()
+           return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}' | {audio_stream} "
+       else:
+           return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'"
+
+            # sgpt_process = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
+            # output = sgpt_process.stdout.decode().strip().replace("'", "")
+
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
