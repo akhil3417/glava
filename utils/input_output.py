@@ -62,6 +62,14 @@ def speak_or_print(text, VOICE=None, json_input=False):
             pass
     else:
         print(text)
+def get_transcript():
+    try:
+        with open("/tmp/transcript.txt", "r") as f:
+            return f.read().replace("'", "")
+    except FileNotFoundError:
+        logging.error("Transcript file not found")
+        return ""
+
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
