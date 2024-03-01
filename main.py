@@ -26,6 +26,9 @@ from utils.input_output import (generate_response, get_transcript,
                                 toggle_random_voice_command,
                                 toggle_voice_command,change_voice_model_command,toggle_piper_http_server_command,toggle_vosk_websocket_server_command)
 
+from rich import print as rich_print
+from rich.rule import Rule
+from rich.prompt import Prompt
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description='Interactive SGPT.')
 parser.add_argument('--model', type=str, default='2', help='Voice model to use')
@@ -52,10 +55,11 @@ def get_time_of_day():
     else:
         return "Hello"
 
-def greet_me(user, hostname):
+def greet_me(USER, HOSTNAME):
     time_of_day = get_time_of_day()
-    speak_or_print(f"{time_of_day} {user}. I am {hostname}. How may I assist you?")
+    rich_print(f"{time_of_day} [bold magenta]{USER}[/bold magenta]. I am [bold magenta]{HOSTNAME}[/bold magenta]. How may I assist you?")
 
+greet_me(USER, HOSTNAME)
 
 # keyboard_listener = keyboard.GlobalHotKeys({
 #     # '<ctrl>+<alt>+k': start_listening,
