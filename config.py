@@ -25,3 +25,9 @@ VOICE_MODELS = {
 
 }
 
+SPEAKER_IDS = {
+    'en_US-arctic-medium.onnx': [0, 5, 3, 8, 9, 13, 16, 17],
+    'en_US-libritts-high.onnx': list(range(0, 903)),
+    'en_US-libritts_r-medium.onnx': list(range(0, 903)),
+}
+
