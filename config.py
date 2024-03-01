@@ -31,3 +31,7 @@ SPEAKER_IDS = {
     'en_US-libritts_r-medium.onnx': list(range(0, 903)),
 }
 
+PIPER_EXECUTABLE = os.path.join(os.path.abspath(os.path.join(BASE_DIR, 'extensions/piper/')), 'piper')
+PIPER_HTTP_SERVER=False
+PIPER_HTTP_SERVER_SCRIPT=os.path.abspath(os.path.join(BASE_DIR, 'scripts/piperstreamhttp.py'))
+PIPER_SCRIPT_ARGS = f"--sentence_silence 0.2 --noise_scale 0.333 --noise_w 0.333 --length_scale 1.3 -m {voice_model}"
