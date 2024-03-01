@@ -24,6 +24,43 @@ def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
             speak_or_print("I can't find about daily news..")
 
 
+def get_news(user_input):
+    news = []
+    url = "https://newsapi.org/v2/top-headlines"
+    categories = ["business", "entertainment", "general", "health", "sciences", "sports", "technology"]
+    sources = ["bbc-news", "the-times-of-india"]
+    querystring = {"country": COUNTRY,"categories":"sciences"}
+#     result = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&sources=bbc-news&category=general&apiKey" f"={NEWS_API_KEY}").json()
+
+    if any(category in user_input for category in categories):
+        querystring = {"country": COUNTRY, "categories": next(category for category in categories if category in user_input)}#, "pageSize": "50"
+    elif any(source in user_input for source in sources):
+        querystring = {"sources": next(source for source in sources if source in user_input)}
+
+    headers = {
+        'x-api-key': NEWS_API_KEY,
+        # 'x-rapidapi-host': "newsapi-org-headlines-live.p.rapidapi.com"
+    }
+    # response = requests.request("GET", url, headers=headers, params=querystring)
+
+    print(querystring)
+    session = requests.Session()
+    response = session.get(url, headers=headers, params=querystring)
+    response.raise_for_status()
+    result = response.json()
+    # Check if 'articles' key is present in the response
+    if 'articles' in result:
+        articles = result["articles"]
+        for article in articles:
+            news.append({
+                'text': article["title"],
+                'description': article["description"]
+            })
+    else:
+        print("Response does not contain 'articles' key")
+    return news[:6]
+
+
 def search_on_wikipedia(query):
     try:
         results = wikipedia.summary(query, sentences=3)
