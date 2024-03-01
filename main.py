@@ -56,6 +56,15 @@ def greet_me(user, hostname):
     time_of_day = get_time_of_day()
     speak_or_print(f"{time_of_day} {user}. I am {hostname}. How may I assist you?")
 
+
+# keyboard_listener = keyboard.GlobalHotKeys({
+#     # '<ctrl>+<alt>+k': start_listening,
+#     # '<ctrl>+<alt>+p': stop_listening
+#     '<ctrl>+b': speech_recognition,
+#     '<ctrl>+B': stop_listening
+# })
+# keyboard_listener.start()
+
 async def handle_command(user_input):
     commands = {
         "term": term_sgpt,
