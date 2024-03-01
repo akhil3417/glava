@@ -20,3 +20,7 @@ def kill_piper():
     for pid in pids:
         kill_process(pid)
     print(f"Killed Piper Http Server with Pids {pids}")
+def start_vosk_service_command():
+    command = f"python3 {VOSK_WEBSOCKET_SCRIPT} -m {VOSK_MODELS_DIR}{VOSK_MODEL}/"
+    print(f"Starting Vosk Websocket Server on Port 2700 with Default model")
+    subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
