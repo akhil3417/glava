@@ -70,6 +70,16 @@ def get_transcript():
         logging.error("Transcript file not found")
         return ""
 
+def start_process(cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT):
+    try:
+    # print(f"Executing command: {cmd}")
+        subprocess.Popen(cmd, shell=shell, stdout=stdout, stderr=stderr)
+        # subprocess.run(cmd, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+    except TypeError:
+        pass
+    except Exception as e:
+        print("An error occurred in handle_command:", e)
+
 async def input_without_listen(user_input):
     user_input = await asyncio.to_thread(input, "Enter Query:")
 #     user_input = input("Enter:")
