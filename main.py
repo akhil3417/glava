@@ -34,9 +34,14 @@ args = parser.parse_args()
 # Get voice model from command-line arguments
 VOICE_MODEL = VOICE_MODELS[args.model]
 
+async def handle_command(user_input):
+    commands = {
         "term": term_sgpt,
         "browser": open_browser_command,
         "wiki":wikipedia_command_async,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
         # "movie": movie_command,
+    }
+    generate_response(user_input)
+
