@@ -10,6 +10,9 @@ from config import COUNTRY, NEWS_API_KEY
 from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import speak_or_print, take_command
 
+from .online import weather_forecast
+
+
 def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
     try:
         news_url = "https://news.google.com/news/rss"
@@ -107,6 +110,26 @@ async def wikipedia_command_async():
     results = search_on_wikipedia(query)
     speak_or_print("Here's a quick summary from Wikipedia.\n")
     speak_or_print(results)
+
+def weather_command():
+    # ip_address = find_my_ip()
+    speak_or_print("tell me the name of your city")
+    city = input("Enter name of your city")
+    speak_or_print(f"Getting weather report for your city {city}")
+    weather, temp, feels_like = weather_forecast(city)
+    speak_or_print(f"The current temperature is {temp}, but it feels like {feels_like}")
+    speak_or_print(f"Also, the weather report talks about {weather}")
+    speak_or_print("For your convenience, I am printing it on the screen sir.")
+    print(f"Description: {weather}\nTemperature: {temp}\nFeels like: {feels_like}")
+
+def weather_forecast(city):
+    res = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid"
+                       f"=&units=metric").json()
+    weather = res["weather"][0]["main"]
+    temp = res["main"]["temp"]
+    feels_like = res["main"]["feels_like"]
+    return weather, f"{temp}°C", f"{feels_like}°C"
+
 
 
 def movie_command():

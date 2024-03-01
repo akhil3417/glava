@@ -14,7 +14,7 @@ from skills.browser import (open_browser_command, open_websites,
                             query_web_command_async, web_search)
 from skills.info import (calculate_command, google_news_command, movie_command,
                          read_news, weather_command, what_is_wolframe,
-                         wikipedia_command_async)
+                         wikipedia_command_async,weather_forecast)
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
 from utils.command_handlers import term_sgpt
@@ -68,6 +68,9 @@ async def handle_command(user_input):
         "google news":google_news_command,
         "get news":read_news,
         "wiki":wikipedia_command_async,
+        # "weather":weather_command,
+        #  FIXME 2024-03-01: choose if use a city var , or extract from user_input
+        "weather forecast":weather_forecast,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
 #linux
