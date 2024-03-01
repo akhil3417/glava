@@ -94,6 +94,23 @@ def send_notification(title, message):
     start_process(['notify-send', title, message])
 
 
+def change_voice_model_command():
+    print("Choose voice model:")
+    for choice, model in VOICE_MODELS.items():
+        print(f"{choice}: {os.path.splitext(os.path.basename(model))[0]}")
+    model_choice = input("Enter your choice: ")
+    if model_choice in VOICE_MODELS:
+        global voice_model
+        if voice_model != VOICE_MODELS[model_choice]:  # Check if the voice model has changed
+            voice_model = VOICE_MODELS[model_choice]
+            if PIPER_HTTP_SERVER:
+                print(f"Killing and Restarting Piper Tts server with {voice_model} model.")
+                kill_piper()
+                start_piper_tts_service()  # Start the service with the new voice model
+            return voice_model
+    else:
+        print("Invalid choice. Please choose a number from the list.")
+
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
