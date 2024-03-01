@@ -6,3 +6,17 @@ def start_piper_tts_service():
     print(f"Starting Piper Http Server on Port 5000 with Default {os.path.basename(voice_model)} model")
     # start_process(command,shell=True)
     subprocess.Popen(command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
+def get_pid(name):
+    return subprocess.check_output(["pgrep", "-f", name])
+
+def kill_process(pid):
+    os.system(f'kill -9 {pid}')
+
+def kill_piper():
+    global PIPER_HTTP_SERVER_SCRIPT
+    pid=get_pid(PIPER_HTTP_SERVER_SCRIPT)
+    pid_str = pid.decode('utf-8').strip()  # Convert bytes to string and remove any whitespace
+    pids = pid_str.split('\n')
+    for pid in pids:
+        kill_process(pid)
+    print(f"Killed Piper Http Server with Pids {pids}")
