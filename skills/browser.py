@@ -41,3 +41,8 @@ def open_websites(user_input):
         print(DEFAULT_BROWSER)
         open_in_browser(DEFAULT_BROWSER, url)
 
+async def query_web_command_async():
+    speak_or_print("What do you want to search for?")
+    query= await take_command()
+    web_search(query)
+
