@@ -35,3 +35,8 @@ PIPER_EXECUTABLE = os.path.join(os.path.abspath(os.path.join(BASE_DIR, 'extensio
 PIPER_HTTP_SERVER=False
 PIPER_HTTP_SERVER_SCRIPT=os.path.abspath(os.path.join(BASE_DIR, 'scripts/piperstreamhttp.py'))
 PIPER_SCRIPT_ARGS = f"--sentence_silence 0.2 --noise_scale 0.333 --noise_w 0.333 --length_scale 1.3 -m {voice_model}"
+
+VOSK_WEBSOCKET_SERVER=False
+VOSK_WEBSOCKET_SCRIPT=os.path.join(BASE_DIR,'scripts/vosk_rest_websocket.py')
+VOSK_MODELS_DIR=os.path.join(BASE_DIR,'extensions/vosk/')
+VOSK_MODEL="vosk-model-en-in-0.5"
