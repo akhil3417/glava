@@ -11,6 +11,12 @@ from config import (IS_LISTENING, IS_RANDOM_VOICE, PIPER_EXECUTABLE,
 from config import get_jarvis_prompt, get_sgpt_args,voice_model
 from .speech_recognition import start_listening
 from .services import kill_vosk, start_piper_tts_service,kill_piper
+
+def toggle_is_listening_command():
+    global IS_LISTENING
+    IS_LISTENING = not IS_LISTENING
+    print(f"Is Listening status: {IS_LISTENING}")
+
 def speaker_ids(voice_model):
     voice_model = os.path.basename(voice_model)  # Strip the path from the voice_model value
     if voice_model in SPEAKER_IDS:
