@@ -10,9 +10,6 @@ from config import COUNTRY, NEWS_API_KEY
 from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import speak_or_print, take_command
 
-from .online import weather_forecast
-
-
 def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
     try:
         news_url = "https://news.google.com/news/rss"
