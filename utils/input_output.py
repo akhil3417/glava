@@ -89,6 +89,11 @@ async def take_command():
         user_input = await input_without_listen('Enter: ')
     return user_input
 
+def send_notification(title, message):
+    # Send a notification using notify-send
+    start_process(['notify-send', title, message])
+
+
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
