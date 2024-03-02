@@ -11,7 +11,15 @@ def is_command_safe(cmd):
         r"rm\s+-[rRf]",  # Remove command
         r";",  # Command separator
         r"\|",  # Pipe
-        r"&",  # Background process
+        # r"&",  # Background process
+        r"(^|\s)(cat|cd|chmod|chown|cp|df|diff|du|find|fmt|grep|less|ln|ls|make|mkdir|mv|rm|sed|sort|tail|tar|touch|uniq|vi|wc)($|\s)",  # File manipulation commands
+        r"(^|\s)(curl|wget|ssh|ftp|ping|telnet)($|\s)",  # Network commands
+        r"(^|\s)(kill|pkill|ps|top|htop|atop|uptime|free)($|\s)",  # Process manipulation commands
+        r"(^|\s)(export|unset|set|env)($|\s)",  # Environment variable manipulation commands
+        r"(^|\s)(dmesg|uname|hostname|lspci|lsusb|lshw|dmidecode)($|\s)",  # System information commands
+        r"(^|\s)(sudo|su|doas|useradd|userdel|usermod|groupadd|groupdel|groupmod|passwd)($|\s)",  # User manipulation commands
+        r"(^|\s)(hdparm|fdisk|mount|umount|mkfs|dd|parted)($|\s)",  # Hardware manipulation commands
+        r"(^|\s)(install|remove)($|\s)",  # other
     ]
     for pattern in unsafe_patterns:
         if re.search(pattern, cmd):
