@@ -20,10 +20,10 @@ async def listen(uri, is_listening):
                 transcript = await websocket.recv()
                 transcript_dict = json.loads(transcript)
                 # if 'text' in transcript_dict and transcript_dict['text'].startswith("hey"):
-                if len(transcript_dict.get('text', '')) > 10 and 'text' in transcript:
+                if len(transcript_dict.get("text", "")) > 10 and "text" in transcript:
                     with open("/tmp/transcript.txt", "w") as f:
-                        f.write(transcript_dict['text'])
-                    print(f"User:",transcript_dict['text'])
+                        f.write(transcript_dict["text"])
+                    print(f"User:", transcript_dict["text"])
                     return
 
             except json.JSONDecodeError:
