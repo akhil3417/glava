@@ -44,7 +44,7 @@ def is_command_safe(cmd):
         f"[bold green]Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
     )
     send_notification("Generated Command", cleaned_output)
-    return output
+    return cleaned_output
 
 
 def sgpt_shell_ai(user_input):
