@@ -47,6 +47,12 @@ def is_command_safe(cmd):
     return cleaned_output
 
 
+def remove_markdown_formatting(text):
+    # markdown_formatting_codes = r"(\*|\~|\`|\||\_|\#|\+|\-|\!|\[|\]|\(|\)|\.|\>|\<|\=)"
+    markdown_formatting_codes = r"(\bash|\n|\`|)"
+    return re.sub(markdown_formatting_codes, "", text)
+
+
 def sgpt_shell_ai(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     is_command_safe(run_cmd)
