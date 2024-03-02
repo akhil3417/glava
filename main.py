@@ -148,7 +148,6 @@ async def handle_command(user_input):
         "tll": toggle_is_listening_command,
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
-        "voss": start_vosk_service_command,
         "votss": toggle_vosk_websocket_server_command
         #
     }
@@ -176,6 +175,7 @@ async def handle_command(user_input):
 
 
 async def voice_sgpt(IS_LISTENING):
+    start_vosk_service_command()
     while True:
         IS_LISTENING = True
         try:
