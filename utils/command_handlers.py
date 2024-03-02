@@ -45,23 +45,36 @@ def sgpt_shell_ai(user_input):
 
 
 def run_command(user_input):
-    # run_cmd = f"sgpt -s '{user_input}'"
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
-    if is_command_safe(run_cmd):
-        print(f"Requested command {run_cmd}")
-        result = subprocess.run(
-            run_cmd,
-            shell=True,
-            check=True,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
+    # run_cmd = f"sgpt -s '{user_input}'"
+    output = is_command_safe(run_cmd)
+    if output is not None:
+        print(
+            f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
         )
-        output = result.stdout.decode("utf-8")
-        start_process(output, shell=True)
-        return output
-    else:
-        print("Unsafe command. Aborting.")
-        return None
+        print(
+            f"[bold green]Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
+        )
+        confirmation = Prompt.ask(
+            "[bold red]Choose to proceed further?:[/bold red]",
+            choices=["execute", "abort", "edit"],
+        )
+        if confirmation.lower() == "execute":
+            subprocess.run(output, shell=True)
+            return output
+        elif confirmation.lower() == "edit":
+            print("[bold blue]Please modify the command below:[/bold blue]")
+            modified_command = prompt("Edit the command: ", default=output)
+            confirmation = "yes"  # Default to "yes" for simplicity
+            if confirmation.lower() == "yes":
+                subprocess.run(modified_command, shell=True)
+                return modified_command
+            else:
+                print("[bold red]Command not confirmed. Aborting.[/bold red]")
+                return None
+        else:
+            print("[bold red]Aborting.[/bold red]")
+            return None
 
 
 def term_sgpt(user_input):
