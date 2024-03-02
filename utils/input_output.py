@@ -110,20 +110,20 @@ async def ask_for_input(user_input):
     return user_input
 
 
-# def generate_response(user_input):
-#     # speak_or_print(random.choice(STARTUP_MESSAGES))
-#     command = get_command(user_input)
-#     start_process(command,shell=True)
-#     # subprocess.run(command, shell=True)
-
-
 def generate_response(user_input):
-    try:
-        command = get_command(user_input)
-        t = threading.Thread(target=start_process, args=(command, True))
-        t.start()
-    except Exception as e:
-        print("An error occurred in handle_command:", e)
+    # speak_or_print(random.choice(STARTUP_MESSAGES))
+    command = get_command(user_input)
+    start_process(command, shell=True)
+    # subprocess.run(command, shell=True)
+
+
+# def generate_response(user_input):
+#     try:
+#         command = get_command(user_input)
+#         t = threading.Thread(target=start_process, args=(command, True))
+#         t.start()
+#     except Exception as e:
+#         print("An error occurred in handle_command:", e)
 
 
 def start_process(
