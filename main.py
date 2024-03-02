@@ -201,9 +201,15 @@ async def interactive_sgpt():
             break
         elif user_input.lower() == "v":
             print("Listening")
-            await handle_async_function(voice_sgpt, IS_LISTENING)
+            try:
+                await handle_async_function(voice_sgpt, IS_LISTENING)
+            except CommandHandlingError as e:
+                print(f"An error occurred: {e}")
         else:
-            await handle_async_function(handle_command, user_input)
+            try:
+                await handle_async_function(handle_command, user_input)
+            except CommandHandlingError as e:
+                print(f"An error occurred: {e}")
 
 
 if __name__ == "__main__":
