@@ -29,7 +29,7 @@ from skills.info import (
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
 from utils.command_handlers import term_sgpt
-from utils.services import start_vosk_service_command
+from utils.services import start_vosk_service_command, start_piper_tts_service
 from utils.memory_consumption import tell_memory_consumption
 from utils.input_output import (
     generate_response,
@@ -114,6 +114,10 @@ class CommandHandlingError(Error):
     """Raised when there's a problem handling a command"""
 
     pass
+
+
+if PIPER_HTTP_SERVER:
+    start_piper_tts_service()
 
 
 async def handle_command(user_input):
