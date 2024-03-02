@@ -60,7 +60,8 @@ def sgpt_shell_ai(user_input):
     start_process(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
-def run_command(user_input):
+#  TODO 2024-03-01:implement executing cli shell commands in new term
+def term_sgpt(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     # run_cmd = f"sgpt -s '{user_input}'"
     output = is_command_safe(run_cmd)
@@ -91,12 +92,5 @@ def run_command(user_input):
         else:
             print("[bold red]Aborting.[/bold red]")
             return None
-
-
-def term_sgpt(
-    user_input,
-):  #  TODO 2024-03-01:implement executing cli shell commands in new term
-    t = threading.Thread(target=run_command, args=(user_input,))
-    t.start()
 
 
