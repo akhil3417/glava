@@ -39,6 +39,11 @@ def is_command_safe(cmd):
     return output
 
 
+def sgpt_shell_ai(user_input):
+    run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
+    is_command_safe(run_cmd)
+
+
 def run_command(user_input):
     # run_cmd = f"sgpt -s '{user_input}'"
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
