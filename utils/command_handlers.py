@@ -21,10 +21,22 @@ def is_command_safe(cmd):
         r"(^|\s)(hdparm|fdisk|mount|umount|mkfs|dd|parted)($|\s)",  # Hardware manipulation commands
         r"(^|\s)(install|remove)($|\s)",  # other
     ]
+    result = subprocess.run(
+        cmd,
+        shell=True,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    output = result.stdout.decode("utf-8")
     for pattern in unsafe_patterns:
-        if re.search(pattern, cmd):
-            return False
-    return True
+        if re.search(pattern, output):
+            print("Unsafe command. Aborting.")
+            return None
+    # If the command is safe, run it
+    cleaned_output = remove_markdown_formatting(output)
+    send_notification("Generated Command", cleaned_output)
+    return output
 
 
 def run_command(user_input):
