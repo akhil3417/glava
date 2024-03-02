@@ -50,6 +50,8 @@ def is_command_safe(cmd):
 def sgpt_shell_ai(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     is_command_safe(run_cmd)
+    cmd = is_command_safe(run_cmd)
+    start_process(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def run_command(user_input):
@@ -68,14 +70,14 @@ def run_command(user_input):
             choices=["execute", "abort", "edit"],
         )
         if confirmation.lower() == "execute":
-            subprocess.run(output, shell=True)
+            start_process(output, shell=True)
             return output
         elif confirmation.lower() == "edit":
             print("[bold blue]Please modify the command below:[/bold blue]")
             modified_command = prompt("Edit the command: ", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
-                subprocess.run(modified_command, shell=True)
+                start_process(modified_command, shell=True)
                 return modified_command
             else:
                 print("[bold red]Command not confirmed. Aborting.[/bold red]")
