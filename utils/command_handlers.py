@@ -33,7 +33,6 @@ def is_command_safe(cmd):
     output = result.stdout.decode("utf-8")
     for pattern in unsafe_patterns:
         if re.search(pattern, output):
-            print(f"Unsafe command {output}. Aborting.")
             print(
                 f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
             )
@@ -55,7 +54,6 @@ def remove_markdown_formatting(text):
 
 def sgpt_shell_ai(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
-    is_command_safe(run_cmd)
     cmd = is_command_safe(run_cmd)
     start_process(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
@@ -63,7 +61,6 @@ def sgpt_shell_ai(user_input):
 #  TODO 2024-03-01:implement executing cli shell commands in new term
 def term_sgpt(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
-    # run_cmd = f"sgpt -s '{user_input}'"
     output = is_command_safe(run_cmd)
     if output is not None:
         print(
