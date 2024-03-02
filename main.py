@@ -185,6 +185,7 @@ async def handle_command(user_input):
 
 async def voice_sgpt(IS_LISTENING):
     start_vosk_service_command()
+    await asyncio.sleep(1.5)
     while True:
         IS_LISTENING = True
         try:
