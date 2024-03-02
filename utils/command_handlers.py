@@ -34,9 +34,15 @@ def is_command_safe(cmd):
     for pattern in unsafe_patterns:
         if re.search(pattern, output):
             print(f"Unsafe command {output}. Aborting.")
+            print(
+                f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
+            )
             return None
     # If the command is safe, run it
     cleaned_output = remove_markdown_formatting(output)
+    print(
+        f"[bold green]Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
+    )
     send_notification("Generated Command", cleaned_output)
     return output
 
