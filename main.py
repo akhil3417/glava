@@ -28,7 +28,7 @@ from skills.info import (
 )
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
-from utils.command_handlers import term_sgpt
+from utils.command_handlers import term_sgpt, sgpt_shell_ai
 from utils.services import start_vosk_service_command, start_piper_tts_service
 from utils.memory_consumption import tell_memory_consumption
 from utils.input_output import (
@@ -122,6 +122,7 @@ if PIPER_HTTP_SERVER:
 
 async def handle_command(user_input):
     commands = {
+        "aterm": sgpt_shell_ai,
         "term": term_sgpt,
         # browser
         "open": open_websites,
