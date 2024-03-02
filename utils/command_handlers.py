@@ -33,7 +33,7 @@ def is_command_safe(cmd):
     output = result.stdout.decode("utf-8")
     for pattern in unsafe_patterns:
         if re.search(pattern, output):
-            print("Unsafe command. Aborting.")
+            print(f"Unsafe command {output}. Aborting.")
             return None
     # If the command is safe, run it
     cleaned_output = remove_markdown_formatting(output)
