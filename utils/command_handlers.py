@@ -48,7 +48,7 @@ def is_command_safe(cmd):
 
 def remove_markdown_formatting(text):
     # markdown_formatting_codes = r"(\*|\~|\`|\||\_|\#|\+|\-|\!|\[|\]|\(|\)|\.|\>|\<|\=)"
-    markdown_formatting_codes = r"(\bash|\n|\`|)"
+    markdown_formatting_codes = r"(\bash|\n|\`|\```|\*)"
     return re.sub(markdown_formatting_codes, "", text)
 
 
