@@ -77,7 +77,9 @@ def run_command(user_input):
             return None
 
 
-def term_sgpt(user_input):
+def term_sgpt(
+    user_input,
+):  #  TODO 2024-03-01:implement executing cli shell commands in new term
     t = threading.Thread(target=run_command, args=(user_input,))
     t.start()
 
