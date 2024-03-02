@@ -35,17 +35,22 @@ async def recognize_microphone():
     model = Model(args.model)
     audio_queue = asyncio.Queue()
 
-    with sd.RawInputStream(samplerate=args.samplerate, blocksize = 8000, device=args.device, dtype='int16',
-                            channels=1, callback=callback) as device:
+    while True:
+        if clients:
+            with sd.RawInputStream(samplerate=args.samplerate, blocksize=8000, device=args.device, dtype='int16',
+                                   channels=1, callback=callback) as device:
+                rec = KaldiRecognizer(model, device.samplerate)
+                while clients:  # Continue recognition while clients are connected
+                    data = await audio_queue.get()
+                    if rec.AcceptWaveform(data):
+                        result = rec.Result()
+                        logging.info(result)
+                        for client in clients:
+                            await client.send(result)
+                logging.info("Client disconnected. Stopping recognition")
 
-        logging.info("Running recognition")
-        rec = KaldiRecognizer(model, device.samplerate)
-        while True:
-            data = await audio_queue.get()
-            if rec.AcceptWaveform(data):
-                result = rec.Result()
-                logging.info(result)
-                websockets.broadcast(clients, result)
+        else:
+            await asyncio.sleep(0.5)
 
 async def main():
 
