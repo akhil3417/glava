@@ -152,25 +152,23 @@ async def voice_sgpt(IS_LISTENING):
         except Exception as e:
             raise VoiceInputError("An error occurred in voice_sgpt:", e)
 
+
+async def handle_async_function(func, *args):
+    try:
+        await func(*args)
+    except Exception as e:
+        raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
+
 async def interactive_sgpt():
     while True:
-        user_input = input(">>\n")
-        if user_input.lower() == 'q':
         user_input = typer.prompt(">>>", prompt_suffix=" ")
+        if user_input.lower() == "exit":
             break
-        elif user_input.lower() == 'v':
+        elif user_input.lower() == "v":
             print("Listening")
-            try:
-                await voice_sgpt(IS_LISTENING)
-            except Exception as e:
-                print("An error occurred in voice_sgpt:", e)
+            await handle_async_function(voice_sgpt, IS_LISTENING)
         else:
-            try:
-                await handle_command(user_input)
-            except TypeError:
-                pass
-            except Exception as e:
-                print("An error occurred in handle_command:", e)
+            await handle_async_function(handle_command, user_input)
 
 
 if __name__ == "__main__":
