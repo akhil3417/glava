@@ -170,7 +170,11 @@ async def handle_command(user_input):
                     await func(user_input)
                     return
                 else:
-                    func(user_input)
+                    # run the function in a separate thread
+                    loop = asyncio.get_event_loop()
+                    task = loop.run_in_executor(None, func, user_input)
+                    await task
+                    # func(user_input)
                     return
             except Exception as e:
                 raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
