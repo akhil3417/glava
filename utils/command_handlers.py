@@ -42,8 +42,6 @@ def is_command_safe(cmd):
                 f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
             )
             return None
-    # If the command is safe, run it
-    cleaned_output = remove_markdown_formatting(output)
     print(
         f"[bold green]Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
     )
