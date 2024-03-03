@@ -206,6 +206,8 @@ async def interactive_sgpt():
         user_input = typer.prompt(">>>", prompt_suffix=" ")
         if user_input.lower() == "exit":
             break
+        if user_input.lower() == "cls":
+            os.system("clear")
         elif user_input.lower() == "v":
             print("Listening")
             try:
