@@ -12,15 +12,19 @@ from config import (
     PIPER_EXECUTABLE,
     PIPER_HTTP_SERVER,
     SCREEN_PRINT,
-    VOICE_MODELS,
     SPEAKER_IDS,
-    VOICE as global_voice,
-    # STARTUP_MESSAGES,
-    VOSK_WEBSOCKET_SERVER,
 )
-from config import get_jarvis_prompt, get_sgpt_args, voice_model
+from config import VOICE as global_voice  # STARTUP_MESSAGES,
+from config import (
+    VOICE_MODELS,
+    VOSK_WEBSOCKET_SERVER,
+    get_jarvis_prompt,
+    get_sgpt_args,
+    voice_model,
+)
+
+from .services import kill_piper, kill_vosk, start_piper_tts_service
 from .speech_recognition import start_listening
-from .services import kill_vosk, start_piper_tts_service, kill_piper
 
 
 def toggle_is_listening_command():
@@ -67,7 +71,7 @@ def get_audio_stream(json_input=False):
 
 def speak_or_print(text, VOICE=None, json_input=False):
     if PIPER_HTTP_SERVER:
-        command = f"curl -G --data-urlencode 'text={text}' 'localhost:5000' | aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
+        command = f"curl -G --data-urlencode 'text={text}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
         subprocess.run(command, shell=True, check=True, input=text, text=True)
         return
     elif VOICE is not None:
