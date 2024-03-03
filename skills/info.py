@@ -27,29 +27,6 @@ async def wikipedia_command_async():
     speak_or_print(results)
 
 
-def weather_command():
-    # ip_address = find_my_ip()
-    speak_or_print("tell me the name of your city")
-    city = input("Enter name of your city")
-    speak_or_print(f"Getting weather report for your city {city}")
-    weather, temp, feels_like = weather_forecast(city)
-    speak_or_print(f"The current temperature is {temp}, but it feels like {feels_like}")
-    speak_or_print(f"Also, the weather report talks about {weather}")
-    speak_or_print("For your convenience, I am printing it on the screen sir.")
-    print(f"Description: {weather}\nTemperature: {temp}\nFeels like: {feels_like}")
-
-
-def weather_forecast(city):
-    res = requests.get(
-        f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid"
-        f"=&units=metric"
-    ).json()
-    weather = res["weather"][0]["main"]
-    temp = res["main"]["temp"]
-    feels_like = res["main"]["feels_like"]
-    return weather, f"{temp}°C", f"{feels_like}°C"
-
-
 def movie_command():
     movies_db = imdb.IMDb()
     speak_or_print("Please tell me the movie name:")
