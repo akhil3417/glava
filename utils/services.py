@@ -58,3 +58,12 @@ def start_vosk_service_command():
     subprocess.Popen(
         command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
     )
+
+
+def kill_aplay_processes():
+    try:
+        pids = get_pid("aplay").splitlines()
+        for pid in pids:
+            kill_process(pid.decode().strip())
+    except subprocess.CalledProcessError:
+        pass

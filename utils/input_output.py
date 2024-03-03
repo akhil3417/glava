@@ -23,7 +23,12 @@ from config import (
     voice_model,
 )
 
-from .services import kill_piper, kill_vosk, start_piper_tts_service
+from .services import (
+    kill_piper,
+    kill_vosk,
+    start_piper_tts_service,
+    kill_aplay_processes,
+)
 from .speech_recognition import start_listening
 
 
@@ -116,8 +121,11 @@ async def ask_for_input(user_input):
 
 def generate_response(user_input):
     # speak_or_print(random.choice(STARTUP_MESSAGES))
+    # Kill all 'aplay' processes
+    kill_aplay_processes()  # in case another request is made , to avoid two audios streaming
     command = get_command(user_input)
     start_process(command, shell=True)
+    # run_shell_command_and_return_output(command, shell=True)
     # subprocess.run(command, shell=True)
 
 
