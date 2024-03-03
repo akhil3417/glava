@@ -10,7 +10,8 @@ from config import COUNTRY, NEWS_API_KEY
 from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import speak_or_print, take_command
 
-def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
+
+def google_news_command(VOICE):  # TODO 2024-02-24: today news 10 ,num =headlines
     try:
         news_url = "https://news.google.com/news/rss"
         client = urllib.request.urlopen(news_url)
@@ -22,11 +23,11 @@ def google_news_command(): #TODO 2024-02-24: today news 10 ,num =headlines
         speak_or_print(f"Here are the top {headlines} headlines:")
         for idx, news in enumerate(news_list[:headlines], start=1):
             data = f"\n{idx}. {news.title.text}"
-            speak_or_print(data)
+            speak_or_print(data, VOICE=VOICE)
             response += data
     except Exception as e:
-            speak_or_print("Error with the execution of skill with message {0}".format(e))
-            speak_or_print("I can't find about daily news..")
+        print("Error with the execution of skill with message {0}".format(e))
+        speak_or_print("I can't find about daily news..")
 
 
 def get_news(user_input):
@@ -69,7 +70,7 @@ def get_news(user_input):
 def read_news(user_input):
     cmd = lambda text: print(text)  # Default command
     if "google" in user_input:
-        google_news_command()
+        google_news_command(VOICE=None)
         if "speak" in user_input:
             google_news_command(VOICE=True)
         return
