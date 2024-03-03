@@ -72,7 +72,21 @@ def term_sgpt(user_input):
     print(
         f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
     )
-    output = is_command_safe(run_cmd)
+    #  NOTE 2024-03-03: since this is func is Interactive , disable is_command_safe check
+    # output = is_command_safe(run_cmd)
+
+    result = subprocess.run(
+        run_cmd,
+        shell=True,
+        check=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    output = result.stdout.decode("utf-8")
+    output = remove_markdown_formatting(output)
+    print(
+        f"[bold green]Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
+    )
     if output:
         confirmation = Prompt.ask(
             "[bold red]Choose to proceed further?:[/bold red][bold yellow]execute, abort, edit[/bold yellow] ",
