@@ -1,12 +1,9 @@
-import os
 import re
 import subprocess
-import threading
+
 from rich import print
 from rich.prompt import Prompt
-from prompt_toolkit import prompt
 
-from .input_output import send_notification, speak_or_print, start_process
 # from skills.online import send_email
 from .input_output import (
     send_notification,
