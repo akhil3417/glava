@@ -11,7 +11,6 @@ from config import HOSTNAME, IS_LISTENING, USER, VOICE_MODELS, PIPER_HTTP_SERVER
 from skills.browser import (
     open_browser_command,
     open_websites,
-    open_youtube_browser_command_async,
     query_web_command_async,
     web_search,
 )
@@ -127,7 +126,6 @@ async def handle_command(user_input):
         "browser": open_browser_command,
         "search": web_search,
         "query for": query_web_command_async,
-        "youtube": open_youtube_browser_command_async,
         # info
         #
         "google news": google_news_command,
