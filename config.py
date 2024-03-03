@@ -4,10 +4,13 @@ import os
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 
+# User specific details
 USER = "Charlie"
 HOSTNAME = "Jarvis"
 EMAIL = ""
 PASSWORD = ""
+
+# API keys
 NEWS_API_KEY = ""
 OPENWEATHER_APP_ID = ""
 NEWS_HEADLINES_NUMBER = 10
@@ -15,12 +18,17 @@ WOLFRAMALPHA_API = ""
 CITY = ""
 
 
+# Directories
 BASE_DIR = os.path.abspath(
     os.path.dirname(__file__)
 )  # This will get the directory of the current python file
+
 VOICE_MODELS_DIR = os.path.abspath(
     os.path.join(BASE_DIR, "extensions/piper/models/")
 )  # Ensure it's an absolute path
+
+
+# Voice models
 VOICE_MODELS = {
     "1": os.path.join(VOICE_MODELS_DIR, "en_US-libritts-high.onnx"),
     "2": os.path.join(VOICE_MODELS_DIR, "en_US-libritts_r-medium.onnx"),
@@ -30,19 +38,22 @@ VOICE_MODELS = {
     "6": os.path.join(VOICE_MODELS_DIR, "en_US-arctic-medium.onnx"),
 }
 
+# Speaker IDs
 SPEAKER_IDS = {
     "en_US-arctic-medium.onnx": [0, 5, 3, 8, 9, 13, 16, 17],
     "en_US-libritts-high.onnx": list(range(0, 903)),
     "en_US-libritts_r-medium.onnx": list(range(0, 903)),
 }
 
+# Voice model and Piper executable
+voice_model = VOICE_MODELS.get("3")
 PIPER_EXECUTABLE = os.path.join(
     os.path.abspath(os.path.join(BASE_DIR, "extensions/piper/")), "piper"
 )
-voice_model = VOICE_MODELS.get("2")
+
 
 IS_RANDOM_VOICE = False
-IS_LISTENING = False
+IS_LISTENING = True
 SCREEN_PRINT = True
 
 VOICE = True
@@ -50,16 +61,18 @@ PIPER_HTTP_SERVER = True
 PIPER_HTTP_SERVER_SCRIPT = os.path.abspath(
     os.path.join(BASE_DIR, "scripts/piper_websocket_server.py")
 )
+
+# Piper script arguments
 PIPER_SCRIPT_ARGS = f"--sentence_silence 0.2 --noise_scale 0.333 --noise_w 0.333 --length_scale 1.3 -m {voice_model}"
 
+# VOSK model and script
 VOSK_WEBSOCKET_SERVER = False
 VOSK_WEBSOCKET_SCRIPT = os.path.join(BASE_DIR, "scripts/vosk_rest_websocket.py")
 VOSK_MODELS_DIR = os.path.join(BASE_DIR, "extensions/vosk/")
 VOSK_MODEL = "vosk-model-en-in-0.5"
 
 
-# BROWSER = "qutebrowser"
-# PROFILE = ""
+# Other settings
 BROWSER = "firefox"
 PROFILE = "-p KodachiBrowserLight"
 TERMINAL = "st"
@@ -71,10 +84,12 @@ STARTUP_MESSAGES = [
 ]
 
 
+# Function to get SGPT arguments
 def get_sgpt_args():
     return "--top-p '0.01' --temperature '0.32' --no-cache --chat jarvis"
 
 
+# Function to get Jarvis prompt
 def get_jarvis_prompt():
     return "answer in less than 100 words , be consise ,clear , informative and dont point out spelling mistaks from the user: "
     # return "provide concise ,clear info , focusing only on the necessary information and not including any unnecessary information such as greetings or spelling mistakes from the user: "
