@@ -130,7 +130,6 @@ def start_process(
     cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
 ):
     try:
-        # print(f"Executing command: {cmd}")
         subprocess.Popen(cmd, shell=shell, stdout=stdout, stderr=stderr)
         # subprocess.run(cmd, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     except TypeError:
