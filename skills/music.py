@@ -35,7 +35,6 @@ async def run_stream_async(user_input):
     query = await take_command()
     print(f"Playing",query)
     if IS_LISTENING:
-        await play_song_and_write_transcript(query)
+        play_song_and_write_transcript(query)
     else:
-        await play_song_and_write_transcript(query)
-
+        play_song_and_write_transcript(query)
