@@ -141,22 +141,23 @@ def start_process(
 def run_shell_command_and_return_output(
     cmd,
     shell=False,
-    stdout=subprocess.DEVNULL,
+    stdout=subprocess.PIPE,
     stderr=subprocess.STDOUT,
     print_output=False,
 ):
     try:
-        result = subprocess.run(
+        process = subprocess.Popen(
             cmd,
             shell=shell,
             stdout=stdout,
             stderr=stderr,
         )
-        output = result.stdout.decode()
-        exit_code = result.returncode
+        output, _ = process.communicate()
+        # exit_code = process.returncode
         if print_output:
-            print(f"Exit code: {exit_code}, Output:\n{output}")
-        return exit_code, output
+            # return print(f"Exit code: {exit_code}, Output:\n{output.decode()}")
+            return print(f"Output:\n{output.decode()}")
+        # return exit_code, output
     except subprocess.CalledProcessError as e:
         return e.returncode, e.output.decode()
     except Exception as e:
