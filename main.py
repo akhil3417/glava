@@ -213,11 +213,13 @@ async def interactive_sgpt():
             print("Listening")
             try:
                 await handle_async_function(voice_sgpt, IS_LISTENING)
+                # await voice_sgpt(IS_LISTENING)
             except CommandHandlingError as e:
                 print(f"An error occurred: {e}")
         else:
             try:
                 await handle_async_function(handle_command, user_input)
+                # await handle_command(user_input)
             except CommandHandlingError as e:
                 print(f"An error occurred: {e}")
 
