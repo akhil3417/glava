@@ -18,11 +18,10 @@ from skills.browser import (
 from skills.info import (
     calculate_command,
     movie_command,
-    weather_command,
     what_is_wolframe,
     wikipedia_command_async,
-    weather_forecast,
 )
+from skills.weather import weather_report_command
 from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
@@ -119,39 +118,42 @@ if PIPER_HTTP_SERVER:
 
 async def handle_command(user_input):
     commands = {
-        "aterm": sgpt_shell_ai,
+        # terminal
+        "jarvis": sgpt_shell_ai,
         "term": term_sgpt,
         # browser
-        "open": open_websites,
+        #
+        "test": open_websites,  #  FIXME 2024-03-03: not very good and maybe not worth improving , sgpt_shell_ai might be possible replacement
         "browser": open_browser_command,
-        "search for": web_search,
+        "search": web_search,
         "query for": query_web_command_async,
         "youtube": open_youtube_browser_command_async,
         # info
+        #
         "google news": google_news_command,
         "get news": read_news,
         "wiki": wikipedia_command_async,
-        # "weather":weather_command,
         #  FIXME 2024-03-01: choose if use a city var , or extract from user_input
-        "weather forecast": weather_forecast,
+        "weather": weather_report_command,
         "calculate": calculate_command,
         "alpha": what_is_wolframe,
         # linux
+        #
         "ip address": ip_address_command_async,
         "new shell": open_new_shell_command,
-        # music
+        # aud & vid
+        #
         "dream": run_stream_async,
         "play": play_song,
         # "movie": movie_command,
         # "send an email": send_email_command,
+        #
         # assistant controls
         "modelv": change_voice_model_command,
         "vcc": toggle_voice_command,
         "tll": toggle_is_listening_command,
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
-        "votss": toggle_vosk_websocket_server_command
-        #
     }
 
     for command, func in commands.items():
