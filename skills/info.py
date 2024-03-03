@@ -33,18 +33,33 @@ def google_news_command(VOICE):  # TODO 2024-02-24: today news 10 ,num =headline
 def get_news(user_input):
     news = []
     url = "https://newsapi.org/v2/top-headlines"
-    categories = ["business", "entertainment", "general", "health", "sciences", "sports", "technology"]
+    categories = [
+        "business",
+        "entertainment",
+        "general",
+        "health",
+        "sciences",
+        "sports",
+        "technology",
+    ]
     sources = ["bbc-news", "the-times-of-india"]
-    querystring = {"country": COUNTRY,"categories":"sciences"}
-#     result = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&sources=bbc-news&category=general&apiKey" f"={NEWS_API_KEY}").json()
+    querystring = {"country": COUNTRY, "categories": "sciences"}
+    #     result = requests.get(f"https://newsapi.org/v2/top-headlines?country=in&sources=bbc-news&category=general&apiKey" f"={NEWS_API_KEY}").json()
 
     if any(category in user_input for category in categories):
-        querystring = {"country": COUNTRY, "categories": next(category for category in categories if category in user_input)}#, "pageSize": "50"
+        querystring = {
+            "country": COUNTRY,
+            "categories": next(
+                category for category in categories if category in user_input
+            ),
+        }  # , "pageSize": "50"
     elif any(source in user_input for source in sources):
-        querystring = {"sources": next(source for source in sources if source in user_input)}
+        querystring = {
+            "sources": next(source for source in sources if source in user_input)
+        }
 
     headers = {
-        'x-api-key': NEWS_API_KEY,
+        "x-api-key": NEWS_API_KEY,
         # 'x-rapidapi-host': "newsapi-org-headlines-live.p.rapidapi.com"
     }
     # response = requests.request("GET", url, headers=headers, params=querystring)
@@ -55,13 +70,12 @@ def get_news(user_input):
     response.raise_for_status()
     result = response.json()
     # Check if 'articles' key is present in the response
-    if 'articles' in result:
+    if "articles" in result:
         articles = result["articles"]
         for article in articles:
-            news.append({
-                'text': article["title"],
-                'description': article["description"]
-            })
+            news.append(
+                {"text": article["title"], "description": article["description"]}
+            )
     else:
         print("Response does not contain 'articles' key")
     return news[:6]
@@ -76,23 +90,25 @@ def read_news(user_input):
         return
     articles = get_news(user_input)
     if "speak" in user_input:
-        cmd=speak_or_print
+        cmd = speak_or_print
         for article in articles:
             print(article["text"])
-            cmd((article["text"]),VOICE=True)
             send_notification("News", article["text"])
+            cmd((article["text"]), VOICE=True)
             if "desc" in user_input:
                 print(article["description"])
-                cmd(article["description"],VOICE=True)
                 send_notification("News", article["description"])
+                cmd(article["description"], VOICE=True)
         return
     else:
-      for article in articles:
-          print(article["text"])
-          if "desc" in user_input:
-              print(article["description"])
-          if cmd != speak_or_print :
-              print("---------------------------------------------------------------------------------------")
+        for article in articles:
+            print(article["text"])
+            if "desc" in user_input:
+                print(article["description"])
+            if cmd != speak_or_print:
+                print(
+                    "---------------------------------------------------------------------------------------"
+                )
 
 
 def search_on_wikipedia(query):
@@ -104,12 +120,14 @@ def search_on_wikipedia(query):
     except wikipedia.exceptions.DisambiguationError:
         return "There are multiple pages matching the query. Please be more specific."
 
+
 async def wikipedia_command_async():
     query = await take_command()  # Await take_command() here
-    print(f"Searching on Wikipedia for",query)
+    print(f"Searching on Wikipedia for", query)
     results = search_on_wikipedia(query)
     speak_or_print("Here's a quick summary from Wikipedia.\n")
     speak_or_print(results)
+
 
 def weather_command():
     # ip_address = find_my_ip()
@@ -122,20 +140,22 @@ def weather_command():
     speak_or_print("For your convenience, I am printing it on the screen sir.")
     print(f"Description: {weather}\nTemperature: {temp}\nFeels like: {feels_like}")
 
+
 def weather_forecast(city):
-    res = requests.get(f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid"
-                       f"=&units=metric").json()
+    res = requests.get(
+        f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid"
+        f"=&units=metric"
+    ).json()
     weather = res["weather"][0]["main"]
     temp = res["main"]["temp"]
     feels_like = res["main"]["feels_like"]
     return weather, f"{temp}°C", f"{feels_like}°C"
 
 
-
 def movie_command():
     movies_db = imdb.IMDb()
     speak_or_print("Please tell me the movie name:")
-    text=input().lower()
+    text = input().lower()
     movies = movies_db.search_movie(text)
     speak_or_print("searching for" + text)
     speak_or_print("I found these")
@@ -148,20 +168,24 @@ def movie_command():
         rating = movie_info["rating"]
         cast = movie_info["cast"]
         actor = cast[0:5]
-        plot = movie_info.get('plot outline', 'plot summary not available')
-        speak_or_print(f"{title} was released in {year} has imdb ratings of {rating}.It has a cast of {actor}. "
-              f"The plot summary of movie is {plot}")
+        plot = movie_info.get("plot outline", "plot summary not available")
+        speak_or_print(
+            f"{title} was released in {year} has imdb ratings of {rating}.It has a cast of {actor}. "
+            f"The plot summary of movie is {plot}"
+        )
 
-        print(f"{title} was released in {year} has imdb ratings of {rating}.\n It has a cast of {actor}. \n"
-              f"The plot summary of movie is {plot}")
+        print(
+            f"{title} was released in {year} has imdb ratings of {rating}.\n It has a cast of {actor}. \n"
+            f"The plot summary of movie is {plot}"
+        )
 
 
 def calculate_command():
-    app_id = "KTKV36-2LRW2LELV8"
+    app_id = ""
     client = wolframalpha.Client(app_id)
-    user_input=input("enter")
+    user_input = input("enter")
     ind = user_input.lower().split().index("calculate")
-    text = user_input.split()[ind + 1:]
+    text = user_input.split()[ind + 1 :]
     result = client.query(" ".join(text))
     try:
         ans = next(result.results).text
@@ -172,21 +196,27 @@ def calculate_command():
 
 
 def what_is_wolframe(user_input):
-    app_id = "KTKV36-2LRW2LELV8"
+    app_id = ""
     client = wolframalpha.Client(app_id)
     # user_input=input("Enter:")
     # user_input= await take_command()
     try:
-        ind = user_input.lower().index('what is') if 'what is' in user_input.lower() else \
-            user_input.lower().index('who is') if 'who is' in user_input.lower() else \
-                user_input.lower().index('which is') if 'which is' in user_input.lower() else None
+        ind = (
+            user_input.lower().index("what is")
+            if "what is" in user_input.lower()
+            else user_input.lower().index("who is")
+            if "who is" in user_input.lower()
+            else user_input.lower().index("which is")
+            if "which is" in user_input.lower()
+            else None
+        )
 
         if ind is not None:
-            text = user_input.split()[ind + 2:]
+            text = user_input.split()[ind + 2 :]
             res = client.query(" ".join(text))
             ans = next(res.results).text
-            speak_or_print("The answer is " + ans)
-            print("The answer is " + ans)
+            speak_or_print(ans)
+            # print("The answer is " + ans)
         else:
             speak_or_print("I couldn't find that. Please try again.")
     except StopIteration:
