@@ -2,9 +2,9 @@ import asyncio
 import logging
 import os
 import random
-import shlex
 import subprocess
-import threading
+
+# import threading
 
 from config import (
     IS_LISTENING,
@@ -15,7 +15,7 @@ from config import (
     VOICE_MODELS,
     SPEAKER_IDS,
     VOICE as global_voice,
-    STARTUP_MESSAGES,
+    # STARTUP_MESSAGES,
     VOSK_WEBSOCKET_SERVER,
 )
 from config import get_jarvis_prompt, get_sgpt_args, voice_model
