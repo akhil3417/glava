@@ -1,18 +1,14 @@
-import requests
-#  NOTE 2024-02-23: pywhatkit is really heavy
+from config import EMAIL, PASSWORD
 from email.message import EmailMessage
 import smtplib
-# from decouple import config
 
-EMAIL = ""
-PASSWORD = ""
 
 def send_email(receiver_add, subject, message):
     try:
         email = EmailMessage()
-        email['To'] = receiver_add
-        email['Subject'] = subject
-        email['From'] = EMAIL
+        email["To"] = receiver_add
+        email["Subject"] = subject
+        email["From"] = EMAIL
 
         email.set_content(message)
         s = smtplib.SMTP("smtp.gmail.com", 587)
