@@ -78,15 +78,15 @@ def term_sgpt(user_input):
             f"[bold green]Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
         )
         confirmation = Prompt.ask(
-            "[bold red]Choose to proceed further?:[/bold red]",
-            choices=["execute", "abort", "edit"],
+            "[bold red]Choose to proceed further?:[/bold red][bold yellow]execute, abort, edit[/bold yellow] ",
+            choices=["e", "a", "c"],
         )
-        if confirmation.lower() == "execute":
+        if confirmation.lower() == "e":
             start_process(output, shell=True)
             return output
-        elif confirmation.lower() == "edit":
+        elif confirmation.lower() == "c":
             print("[bold blue]Please modify the command below:[/bold blue]")
-            modified_command = prompt("Edit the command: ", default=output)
+            modified_command = prompt("Edit Generated command: ", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
                 start_process(modified_command, shell=True)
