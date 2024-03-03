@@ -77,8 +77,8 @@ def term_sgpt(user_input):
             start_process(output, shell=True)
             return output
         elif confirmation.lower() == "e":
-            print("[bold blue]Please modify the command below:[/bold blue]")
-            modified_command = prompt(" ", default=output)
+            print("[bold blue]Please modify the command :[/bold blue]", end=" ")
+            modified_command = prompt("", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
                 start_process(modified_command, shell=True)
