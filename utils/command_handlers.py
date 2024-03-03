@@ -66,7 +66,8 @@ def sgpt_shell_ai(user_input):
 
 
 def term_sgpt(user_input):
-    run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
+    # run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
+    run_cmd = f"sgpt -s --no-cache --no-interaction --chat command '{user_input}'"
     print(
         f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
     )
