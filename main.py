@@ -25,7 +25,7 @@ from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
 from utils.command_handlers import term_sgpt, sgpt_shell_ai
-from utils.services import start_vosk_service_command, start_piper_tts_service
+from utils.services import start_piper_tts_service
 from utils.memory_consumption import tell_memory_consumption
 from utils.input_output import (
     generate_response,
@@ -152,6 +152,7 @@ async def handle_command(user_input):
         "tll": toggle_is_listening_command,
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
+        "votss": toggle_vosk_websocket_server_command,
     }
 
     for command, func in commands.items():
