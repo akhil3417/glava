@@ -78,13 +78,15 @@ def term_sgpt(user_input):
             choices=["c", "a", "e"],
         )
         if confirmation.lower() == "c":
-            run_shell_command_and_return_output(output)
+            run_shell_command_and_return_output(output, shell=True, print_output=True)
         elif confirmation.lower() == "e":
             print("[bold blue]Please modify the command :[/bold blue]", end=" ")
             modified_command = prompt("", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
-                run_shell_command_and_return_output(modified_command)
+                run_shell_command_and_return_output(
+                    modified_command, shell=True, print_output=True
+                )
             else:
                 print("[bold red]Command not confirmed. Aborting.[/bold red]")
                 return None

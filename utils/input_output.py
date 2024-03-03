@@ -139,16 +139,29 @@ def start_process(
         print("An error occurred in handle_command:", e)
 
 
-def run_shell_command_and_return_output(shell_command):
+def run_shell_command_and_return_output(
+    cmd,
+    shell=False,
+    stdout=subprocess.DEVNULL,
+    stderr=subprocess.STDOUT,
+    print_output=False,
+):
     try:
-        process = subprocess.Popen(
-            shell_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+        result = subprocess.run(
+            cmd,
+            shell=shell,
+            stdout=stdout,
+            stderr=stderr,
         )
-        output, _ = process.communicate()
-        exit_code = process.returncode
-        return print(f"Exit code: {exit_code}, Output:\n{output.decode()}")
+        output = result.stdout.decode()
+        exit_code = result.returncode
+        if print_output:
+            print(f"Exit code: {exit_code}, Output:\n{output}")
+        return exit_code, output
+    except subprocess.CalledProcessError as e:
+        return e.returncode, e.output.decode()
     except Exception as e:
-        return f"An error occurred: {str(e)}"
+        return None, f"An error occurred: {str(e)}"
 
 
 async def input_without_listen(user_input):
