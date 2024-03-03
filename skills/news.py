@@ -7,23 +7,31 @@ from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import send_notification, speak_or_print
 
 
-def google_news_command(VOICE):  # TODO 2024-02-24: today news 10 ,num =headlines
+def google_news_command(VOICE, headlines=10):
     try:
         news_url = "https://news.google.com/news/rss"
         client = urllib.request.urlopen(news_url)
         xml_page = client.read()
         client.close()
         soup = bs(xml_page, "xml")
-        news_list = soup.findAll("item")
+        news_list = soup.findAll("item")[:headlines]
         response = ""
-        speak_or_print(f"Here are the top {headlines} headlines:")
-        for idx, news in enumerate(news_list[:headlines], start=1):
+        speak_or_print(f"Here are the top {headlines} headlines:", VOICE)
+        headlines = []
+        for idx, news in enumerate(news_list, start=1):
             data = f"\n{idx}. {news.title.text}"
-            speak_or_print(data, VOICE=VOICE)
+            data = data.replace('"', "")
             response += data
+            headlines.append(data)
+        if VOICE:
+            for headline in headlines:
+                print(headline)
+                speak_or_print(headline, VOICE=VOICE)
+        else:
+            print(response)
     except Exception as e:
         print("Error with the execution of skill with message {0}".format(e))
-        speak_or_print("I can't find about daily news..")
+        speak_or_print("I can't find about daily news..", VOICE)
 
 
 def get_news(user_input):
@@ -80,10 +88,12 @@ def get_news(user_input):
 def read_news(user_input):
     cmd = lambda text: print(text)  # Default command
     if "google" in user_input:
-        google_news_command(VOICE=None)
         if "speak" in user_input:
             google_news_command(VOICE=True)
+        else:
+            google_news_command(VOICE=None)
         return
+
     articles = get_news(user_input)
     if "speak" in user_input:
         cmd = speak_or_print
