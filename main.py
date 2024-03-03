@@ -6,7 +6,6 @@ from datetime import datetime
 
 from pynput import keyboard
 
-# from config import VOICE_MODELS , USER , HOSTNAME
 # Import necessary modules
 from config import HOSTNAME, IS_LISTENING, USER, VOICE_MODELS, PIPER_HTTP_SERVER
 from skills.browser import (
@@ -18,14 +17,13 @@ from skills.browser import (
 )
 from skills.info import (
     calculate_command,
-    google_news_command,
     movie_command,
-    read_news,
     weather_command,
     what_is_wolframe,
     wikipedia_command_async,
     weather_forecast,
 )
+from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
 from utils.command_handlers import term_sgpt, sgpt_shell_ai
@@ -34,7 +32,6 @@ from utils.memory_consumption import tell_memory_consumption
 from utils.input_output import (
     generate_response,
     get_transcript,
-    speak_or_print,
     start_listening,
     toggle_is_listening_command,
     toggle_random_voice_command,
