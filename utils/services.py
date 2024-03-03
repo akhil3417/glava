@@ -60,6 +60,14 @@ def start_vosk_service_command():
     )
 
 
+def is_aplay_running():
+    try:
+        pid = get_pid("aplay")
+        return pid != b""
+    except subprocess.CalledProcessError:
+        return False
+
+
 def kill_aplay_processes():
     try:
         pids = get_pid("aplay").splitlines()
