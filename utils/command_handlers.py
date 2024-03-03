@@ -34,7 +34,7 @@ def is_command_safe(cmd):
     output = result.stdout.decode("utf-8")
     cleaned_output = remove_markdown_formatting(output)
     print(
-        f"[bold green]Raw Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
+        f"[bold green]Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
     )
     for pattern in unsafe_patterns:
         if re.search(pattern, cleaned_output):
@@ -42,9 +42,6 @@ def is_command_safe(cmd):
                 f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
             )
             return None
-    print(
-        f"[bold green]Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
-    )
     send_notification("Generated Command", cleaned_output)
     return cleaned_output
 
@@ -67,14 +64,11 @@ def sgpt_shell_ai(user_input):
 #  TODO 2024-03-01:implement executing cli shell commands in new term
 def term_sgpt(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
+    print(
+        f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
+    )
     output = is_command_safe(run_cmd)
     if output:
-        print(
-            f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
-        )
-        print(
-            f"[bold green]Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
-        )
         confirmation = Prompt.ask(
             "[bold red]Choose to proceed further?:[/bold red][bold yellow]execute, abort, edit[/bold yellow] ",
             choices=["c", "a", "e"],
@@ -84,7 +78,7 @@ def term_sgpt(user_input):
             return output
         elif confirmation.lower() == "e":
             print("[bold blue]Please modify the command below:[/bold blue]")
-            modified_command = prompt("Edit Generated command: ", default=output)
+            modified_command = prompt(" ", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
                 start_process(modified_command, shell=True)
