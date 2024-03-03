@@ -6,7 +6,7 @@ import requests
 import wikipedia
 import wolframalpha
 from bs4 import BeautifulSoup as bs
-from config import COUNTRY, NEWS_API_KEY
+from config import COUNTRY, NEWS_API_KEY, WOLFRAMALPHA_API
 from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import speak_or_print, take_command, send_notification
 
@@ -181,7 +181,7 @@ def movie_command():
 
 
 def calculate_command():
-    app_id = ""
+    app_id = WOLFRAMALPHA_API
     client = wolframalpha.Client(app_id)
     user_input = input("enter")
     ind = user_input.lower().split().index("calculate")
@@ -196,7 +196,7 @@ def calculate_command():
 
 
 def what_is_wolframe(user_input):
-    app_id = ""
+    app_id = WOLFRAMALPHA_API
     client = wolframalpha.Client(app_id)
     # user_input=input("Enter:")
     # user_input= await take_command()
