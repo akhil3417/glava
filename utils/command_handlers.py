@@ -7,6 +7,13 @@ from rich.prompt import Prompt
 from prompt_toolkit import prompt
 
 from .input_output import send_notification, speak_or_print, start_process
+# from skills.online import send_email
+from .input_output import (
+    send_notification,
+    speak_or_print,
+    start_process,
+    run_shell_command_and_return_output,
+)
 
 
 def is_command_safe(cmd):
@@ -61,7 +68,6 @@ def sgpt_shell_ai(user_input):
         )
 
 
-#  TODO 2024-03-01:implement executing cli shell commands in new term
 def term_sgpt(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     print(
@@ -74,15 +80,13 @@ def term_sgpt(user_input):
             choices=["c", "a", "e"],
         )
         if confirmation.lower() == "c":
-            start_process(output, shell=True)
-            return output
+            run_shell_command_and_return_output(output)
         elif confirmation.lower() == "e":
             print("[bold blue]Please modify the command :[/bold blue]", end=" ")
             modified_command = prompt("", default=output)
             confirmation = "yes"  # Default to "yes" for simplicity
             if confirmation.lower() == "yes":
-                start_process(modified_command, shell=True)
-                return modified_command
+                run_shell_command_and_return_output(modified_command)
             else:
                 print("[bold red]Command not confirmed. Aborting.[/bold red]")
                 return None
