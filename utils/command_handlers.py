@@ -3,6 +3,7 @@ import subprocess
 
 from rich import print
 from rich.prompt import Prompt
+from prompt_toolkit import prompt
 
 # from skills.online import send_email
 from .input_output import (
