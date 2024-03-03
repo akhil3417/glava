@@ -1,10 +1,8 @@
 import threading
 
 import imdb
-import requests
 import wikipedia
 import wolframalpha
-from bs4 import BeautifulSoup as bs
 from config import WOLFRAMALPHA_API
 from utils.input_output import speak_or_print, take_command
 
