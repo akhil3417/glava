@@ -8,7 +8,7 @@ import wolframalpha
 from bs4 import BeautifulSoup as bs
 from config import COUNTRY, NEWS_API_KEY
 from config import NEWS_HEADLINES_NUMBER as headlines
-from utils.input_output import speak_or_print, take_command
+from utils.input_output import speak_or_print, take_command, send_notification
 
 
 def google_news_command(VOICE):  # TODO 2024-02-24: today news 10 ,num =headlines
@@ -80,9 +80,11 @@ def read_news(user_input):
         for article in articles:
             print(article["text"])
             cmd((article["text"]),VOICE=True)
+            send_notification("News", article["text"])
             if "desc" in user_input:
                 print(article["description"])
                 cmd(article["description"],VOICE=True)
+                send_notification("News", article["description"])
         return
     else:
       for article in articles:
