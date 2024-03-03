@@ -139,6 +139,18 @@ def start_process(
         print("An error occurred in handle_command:", e)
 
 
+def run_shell_command_and_return_output(shell_command):
+    try:
+        process = subprocess.Popen(
+            shell_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
+        )
+        output, _ = process.communicate()
+        exit_code = process.returncode
+        return print(f"Exit code: {exit_code}, Output:\n{output.decode()}")
+    except Exception as e:
+        return f"An error occurred: {str(e)}"
+
+
 async def input_without_listen(user_input):
     user_input = await asyncio.to_thread(input, "Enter Query:")
     #     user_input = input("Enter:")
