@@ -4,6 +4,7 @@ import subprocess
 import threading
 from rich import print
 from rich.prompt import Prompt
+from prompt_toolkit import prompt
 
 from .input_output import send_notification, speak_or_print, start_process
 
@@ -31,10 +32,14 @@ def is_command_safe(cmd):
         stderr=subprocess.PIPE,
     )
     output = result.stdout.decode("utf-8")
+    cleaned_output = remove_markdown_formatting(output)
+    print(
+        f"[bold green]Raw Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
+    )
     for pattern in unsafe_patterns:
-        if re.search(pattern, output):
+        if re.search(pattern, cleaned_output):
             print(
-                f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {output}[/bold yellow]"
+                f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
             )
             return None
     # If the command is safe, run it
@@ -55,14 +60,17 @@ def remove_markdown_formatting(text):
 def sgpt_shell_ai(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     cmd = is_command_safe(run_cmd)
-    start_process(cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if cmd:
+        start_process(
+            cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
+        )
 
 
 #  TODO 2024-03-01:implement executing cli shell commands in new term
 def term_sgpt(user_input):
     run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
     output = is_command_safe(run_cmd)
-    if output is not None:
+    if output:
         print(
             f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
         )
