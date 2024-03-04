@@ -2,7 +2,7 @@
 
 #Create and activate virtualenv
 
-virtualenv .env && . .env/bin/activate
+virtualenv -p python3.10 .env && . .env/bin/activate
 
 if [ -z "$VIRTUAL_ENV" ]; then
     echo "Virtual environment is not active."
