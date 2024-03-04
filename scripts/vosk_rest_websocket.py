@@ -50,7 +50,7 @@ async def recognize_microphone():
                 logging.info("Client disconnected. Stopping recognition")
 
         else:
-            await asyncio.sleep(0.5)
+            await asyncio.sleep(0.2)
 
 async def main():
 
