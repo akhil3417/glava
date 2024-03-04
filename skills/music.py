@@ -1,4 +1,6 @@
-from config import IS_LISTENING
+import os
+
+from config import BASE_DIR, IS_LISTENING
 from utils.input_output import (
     ask_for_input,
     speak_or_print,
@@ -15,11 +17,11 @@ def play_song_and_write_transcript(song_to_play):
         f.write(song_to_play)
 
     # # Define default script
-    script = "../scripts/yt"
+    script = os.path.abspath(os.path.join(BASE_DIR, "scripts/yt"))
 
     # If "audio" keyword is in the transcript.txt , use 'vosk_music' script
     if "audio" in song_to_play.lower():
-        script = "../scripts/vosk-music"
+        script = os.path.abspath(os.path.join(BASE_DIR, "scripts/yt"))
     # Run music script
     # subprocess.run([script, song_to_play], check=True)
     start_process([script, song_to_play])
