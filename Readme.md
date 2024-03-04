@@ -67,6 +67,9 @@ Follow these steps to install and set up the project:
 
 ## Usage
 
+Make sure you have Shellgpt  up and running if not see [Shellgpt Installation](https://github.com/TheR1D/shell_gpt/tree/main#installation) .
+
+
 To start the project, execute the following command:
 
 ```
