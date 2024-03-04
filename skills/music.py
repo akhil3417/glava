@@ -10,7 +10,6 @@ from utils.input_output import (
 
 
 # stream music(aud vid)
-# def play_song_and_write_transcript(song_to_play, script='/home/shiva/.local/bin/vosk-music'):
 def play_song_and_write_transcript(song_to_play):
     # Write song to play to transcript file
     with open("/tmp/transcript.txt", "w") as f:
@@ -23,11 +22,9 @@ def play_song_and_write_transcript(song_to_play):
     if "audio" in song_to_play.lower():
         script = os.path.abspath(os.path.join(BASE_DIR, "scripts/yt"))
     # Run music script
-    # subprocess.run([script, song_to_play], check=True)
     start_process([script, song_to_play])
 
 
-# def play_command(user_input , script='/home/shiva/gitclones/jarvis-repos/linux-assistant/skills/yt.py'):
 def play_song(user_input):
     play_song_and_write_transcript(user_input)
 
