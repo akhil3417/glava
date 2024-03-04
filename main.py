@@ -23,7 +23,8 @@ from skills.info import (
 from skills.weather import weather_report_command
 from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async, open_new_shell_command
-from skills.music import play_song, run_stream_async
+
+# from skills.music import play_song, run_stream_command_async
 from utils.command_handlers import term_sgpt, sgpt_shell_ai
 from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.memory_consumption import tell_memory_consumption
@@ -44,6 +45,7 @@ from rich.rule import Rule
 from rich.prompt import Prompt
 import typer
 
+from skills.music import stream_yt
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
@@ -143,8 +145,7 @@ async def handle_command(user_input):
         "new shell": open_new_shell_command,
         # aud & vid
         #
-        "dream": run_stream_async,
-        "play": play_song,
+        "play": stream_yt,
         # "movie": movie_command,
         # "send an email": send_email_command,
         #

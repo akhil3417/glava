@@ -1,49 +1,27 @@
-import os
-
-from config import BASE_DIR, IS_LISTENING
+from .yt import get_media_url, play
 from utils.input_output import (
-    ask_for_input,
     speak_or_print,
-    start_process,
     take_command,
 )
 
 
-# stream music(aud vid)
-def play_song_and_write_transcript(song_to_play):
-    # Write song to play to transcript file
-    with open("/tmp/transcript.txt", "w") as f:
-        f.write(song_to_play)
-
-    # # Define default script
-    script = os.path.abspath(os.path.join(BASE_DIR, "scripts/yt"))
-
-    # If "audio" keyword is in the transcript.txt , use 'vosk_music' script
-    if "audio" in song_to_play.lower():
-        script = os.path.abspath(os.path.join(BASE_DIR, "scripts/yt"))
-    # Run music script
-    start_process([script, song_to_play])
+def play_audio(user_input):
+    media_url = get_media_url(user_input, 1)
+    play(media_url, "--ytdl-format=bestaudio --no-video")
 
 
-def play_song(user_input):
-    play_song_and_write_transcript(user_input)
+def play_video(user_input):
+    media_url = get_media_url(user_input, 1)
+    play(media_url, "-v")
 
 
-async def stream_with_listen():
-    song_to_play = await ask_for_input("What do you want to play?")
-    play_song_and_write_transcript(song_to_play)
-
-
-def stream_without_listen():
-    song_to_play = input("What do you want to play? ")
-    play_song_and_write_transcript(song_to_play)
-
-
-async def run_stream_async():
-    speak_or_print("What do you want to play? ")
-    query = await take_command()
-    print(f"Playing", query)
-    if IS_LISTENING:
-        play_song_and_write_transcript(query)
+def stream_yt(user_input):
+    if "video" in user_input:
+        play_video(user_input)
     else:
-        play_song_and_write_transcript(query)
+        play_audio(user_input)
+
+
+async def query_run_stream_async():
+    speak_or_print("What do you want to play? ")
+    await take_command()
