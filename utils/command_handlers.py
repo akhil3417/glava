@@ -58,12 +58,10 @@ def remove_markdown_formatting(text):
 
 
 def sgpt_shell_ai(user_input):
-    run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
+    run_cmd = f"sgpt --no-cache --role commandonly --chat command '{user_input}'"
     cmd = is_command_safe(run_cmd)
     if cmd:
-        start_process(
-            cmd, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
-        )
+        start_process(cmd, shell=True)
 
 
 def term_sgpt(user_input):
@@ -75,13 +73,7 @@ def term_sgpt(user_input):
     #  NOTE 2024-03-03: since this is func is Interactive , disable is_command_safe check
     # output = is_command_safe(run_cmd)
 
-    result = subprocess.run(
-        run_cmd,
-        shell=True,
-        check=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+    result = subprocess.run(run_cmd, shell=True, check=True, capture_output=True)
     output = result.stdout.decode("utf-8")
     output = remove_markdown_formatting(output)
     print(
