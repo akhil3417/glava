@@ -54,19 +54,16 @@ def movie_command():
         )
 
 
-def calculate_command():
+def calculate_wolframe(user_input):
     app_id = WOLFRAMALPHA_API
     client = wolframalpha.Client(app_id)
-    user_input = input("enter")
-    ind = user_input.lower().split().index("calculate")
-    text = user_input.split()[ind + 1 :]
-    result = client.query(" ".join(text))
+    result = client.query(user_input)
     try:
         ans = next(result.results).text
-        speak_or_print("The answer is " + ans)
         print("The answer is " + ans)
+        speak_or_print("The answer is " + ans)
     except StopIteration:
-        speak_or_print("I couldn't find that . Please try again")
+        speak_or_print("I couldnt find that. Please try again")
 
 
 def what_is_wolframe(user_input):
@@ -89,12 +86,11 @@ def what_is_wolframe(user_input):
             text = user_input.split()[ind + 2 :]
             res = client.query(" ".join(text))
             ans = next(res.results).text
-            speak_or_print(ans)
-            # print("The answer is " + ans)
+            print(ans)
         else:
-            speak_or_print("I couldn't find that. Please try again.")
+            speak_or_print("I couldnt find that. Please try again.")
     except StopIteration:
-        speak_or_print("I couldn't find that. Please try again.")
+        speak_or_print("I couldnt find that. Please try again.")
 
 
 def run_wolframe(user_input):
