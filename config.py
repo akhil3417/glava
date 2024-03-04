@@ -43,9 +43,8 @@ CITY = config["OTHER_SETTINGS"]["city"]
 COUNTRY = config["OTHER_SETTINGS"]["country"]
 
 # browser specific
-BROWSER = "firefox"
-PROFILE = "-p KodachiBrowserLight"
-
+BROWSER = config["Browser"]["browser"]
+PROFILE = config["Browser"]["profile"]
 
 # Directories
 BASE_DIR = os.path.abspath(
