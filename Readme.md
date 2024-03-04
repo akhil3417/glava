@@ -1,6 +1,6 @@
-# Project Name: Gnu/Linux Assistant
+# Project Name: Gnu/Linux-ai-voice-assistant
 
-Gnu/Linux assistance is a versatile interface that utilizes various open source tools, offering a seamless interaction with a variety of services and features. This project uses several extensions to provide voice-based interactions. The main components are:
+Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open source tools, offering a seamless interaction with a variety of services and features. This project uses several extensions to provide voice-based interactions. The main components are:
 
 - [Vosk](https://alphacephei.com/vosk/) - An open-source speech recognition toolkit.
 - [Piper](https://github.com/rhasspy/piper) - A library for managing and interfacing with external processes.
