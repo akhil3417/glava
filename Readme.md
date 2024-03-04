@@ -78,6 +78,10 @@ python main.py
 
 You can now interact with the project using voice commands.
 
+## Additional Configuration
+
+User can edit the config.ini as per their needs(assistant name , api-keys etc).
+
 ## Contributing
 
 If you'd like to contribute to this project, please adhere to the following guidelines:
