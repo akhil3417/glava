@@ -28,8 +28,10 @@ async def listen(uri, is_listening):
 
             except json.JSONDecodeError:
                 logging.warning(f"Received non-JSON transcript: {transcript}")
+                break
             except Exception as e:
                 logging.error(f"Unexpected error: {e}")
+                break
 async def start_listening(uri, is_listening):
     listen_task = asyncio.create_task(listen(uri, is_listening))
     return listen_task
