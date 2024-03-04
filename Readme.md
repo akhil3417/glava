@@ -89,6 +89,10 @@ If you'd like to contribute to this project, please adhere to the following guid
 4. Push to the branch: `git push origin feature/AmazingFeature`.
 5. Open a pull request.
 
+## Note
+
+This Project is in early development so bugs are expected and will be fixed in future .
+
 ## License
 
 This project is licensed under the MIT License. For more details, please refer to the [LICENSE.md](LICENSE.md) file in the repository.
