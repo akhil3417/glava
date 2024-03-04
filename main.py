@@ -15,7 +15,7 @@ from skills.browser import (
     web_search,
 )
 from skills.info import (
-    calculate_command,
+    calculate_wolframe,
     movie_command,
     what_is_wolframe,
     wikipedia_command_async,
@@ -25,7 +25,7 @@ from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async, open_new_shell_command
 from skills.music import play_song, run_stream_async
 from utils.command_handlers import term_sgpt, sgpt_shell_ai
-from utils.services import start_piper_tts_service
+from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.memory_consumption import tell_memory_consumption
 from utils.input_output import (
     generate_response,
@@ -118,22 +118,24 @@ if PIPER_HTTP_SERVER:
 async def handle_command(user_input):
     commands = {
         # terminal
+        #
         "jarvis": sgpt_shell_ai,
+        "terminal": term_sgpt,
         "term": term_sgpt,
         # browser
         #
-        "test": open_websites,  #  FIXME 2024-03-03: not very good and maybe not worth improving , sgpt_shell_ai might be possible replacement
-        "browser": open_browser_command,
+        # "test": open_websites,  #  FIXME 2024-03-03: not very good and maybe not worth improving , sgpt_shell_ai might be possible replacement
+        "open browser": open_browser_command,
         "search": web_search,
         "query for": query_web_command_async,
         # info
         #
         "google news": google_news_command,
         "get news": read_news,
-        "wiki": wikipedia_command_async,
+        "search wikipedia": wikipedia_command_async,
         #  FIXME 2024-03-01: choose if use a city var , or extract from user_input
         "weather": weather_report_command,
-        "calculate": calculate_command,
+        "calculate": calculate_wolframe,
         "alpha": what_is_wolframe,
         # linux
         #

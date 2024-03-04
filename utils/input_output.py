@@ -3,8 +3,7 @@ import logging
 import os
 import random
 import subprocess
-
-# import threading
+import threading
 
 from config import (
     IS_LISTENING,
@@ -133,6 +132,7 @@ def generate_response(user_input):
 
 # def generate_response(user_input):
 #     try:
+#         kill_aplay_processes()  # in case another request is make , to avoid two audios streaming
 #         command = get_command(user_input)
 #         t = threading.Thread(target=start_process, args=(command, True))
 #         t.start()
@@ -170,7 +170,8 @@ def run_shell_command_and_return_output(
         # exit_code = process.returncode
         if print_output:
             # return print(f"Exit code: {exit_code}, Output:\n{output.decode()}")
-            return print(f"Output:\n{output.decode()}")
+            # return print(f"Output:\n{output.decode()}")
+            return print(f"\n{output.decode()}")
         # return exit_code, output
     except subprocess.CalledProcessError as e:
         return e.returncode, e.output.decode()

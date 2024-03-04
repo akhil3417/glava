@@ -107,7 +107,7 @@ def get_sgpt_args():
 
 # Function to get Jarvis prompt
 def get_jarvis_prompt():
-    return "answer in less than 100 words , be consise ,clear , informative and dont point out spelling mistaks from the user: "
+    return "answer in less than 80 words , be consise ,clear , informative and dont point out spelling mistaks from the user: "
     # return "provide concise ,clear info , focusing only on the necessary information and not including any unnecessary information such as greetings or spelling mistakes from the user: "
 
 
