@@ -22,7 +22,7 @@ from skills.info import (
 )
 from skills.weather import weather_report_command
 from skills.news import google_news_command, read_news
-from skills.linux import ip_address_command_async, open_new_shell_command
+from skills.linux import ip_address_command_async
 
 # from skills.music import play_song, run_stream_command_async
 from utils.command_handlers import term_sgpt, sgpt_shell_ai
@@ -142,7 +142,6 @@ async def handle_command(user_input):
         # linux
         #
         "ip address": ip_address_command_async,
-        "new shell": open_new_shell_command,
         # aud & vid
         #
         "play": stream_yt,

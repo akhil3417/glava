@@ -1,5 +1,3 @@
-from utils.input_output import start_process,send_notification
-from config import TERMINAL
 import requests
 
 def ip_address():
@@ -20,9 +18,3 @@ async def ip_address_command_async():
 
     # Send the notification
     send_notification('IP Addresses', f'IPv4: {ipv4}\nIPv6: {ipv6}')
-
-def open_new_shell_command():
-    """
-    Opens new bash terminal.
-    """
-    start_process(TERMINAL)
