@@ -47,7 +47,7 @@ def is_command_safe(cmd):
                 f"[bold green]Aborted Unsafe Generated Command[/bold green]:[bold yellow] {cleaned_output}[/bold yellow]"
             )
             return None
-    send_notification("Generated Command", cleaned_output)
+    send_notification("Running", cleaned_output)
     return cleaned_output
 
 
@@ -58,7 +58,7 @@ def remove_markdown_formatting(text):
 
 
 def sgpt_shell_ai(user_input):
-    run_cmd = f"sgpt --no-cache --role commandonly --chat command '{user_input}'"
+    run_cmd = f"sgpt -s --no-cache --no-interaction --chat command '{user_input}'"
     cmd = is_command_safe(run_cmd)
     if cmd:
         start_process(cmd, shell=True)
@@ -66,7 +66,7 @@ def sgpt_shell_ai(user_input):
 
 def term_sgpt(user_input):
     # run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
-    run_cmd = f"sgpt -s --no-cache --no-interaction --chat command '{user_input}'"
+    run_cmd = f"sgpt -s --no-interaction --chat command '{user_input}'"
     print(
         f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
     )
