@@ -53,7 +53,7 @@ Follow these steps to install and set up the project:
 2. Navigate to the project directory:
 
    ```
-   cd projectname
+   cd gnu-linux-ai-voice-assistant
    ```
 
 3. Run the installation script:
