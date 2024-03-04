@@ -260,9 +260,6 @@ def get_command(user_input):
         else:
             return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'"
 
-            # sgpt_process = subprocess.run(command, shell=True, stdout=subprocess.PIPE)
-            # output = sgpt_process.stdout.decode().strip().replace("'", "")
-
 
 def toggle_piper_http_server_command():
     global PIPER_HTTP_SERVER
