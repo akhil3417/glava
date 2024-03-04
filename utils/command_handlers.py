@@ -58,15 +58,14 @@ def remove_markdown_formatting(text):
 
 
 def sgpt_shell_ai(user_input):
-    run_cmd = f"sgpt -s --no-cache --no-interaction --role commandonly '{user_input}'"
+    run_cmd = f"sgpt -s --no-cache --no-interaction --chat cmd '{user_input}'"
     cmd = is_command_safe(run_cmd)
     if cmd:
         start_process(cmd, shell=True)
 
 
 def term_sgpt(user_input):
-    run_cmd = f"sgpt --no-cache --role commandonly '{user_input}'"
-    # run_cmd = f"sgpt -s --no-interaction --chat command '{user_input}'"
+    run_cmd = f"sgpt -s --no-cache --no-interaction --chat cmd '{user_input}'"
     print(
         f"[bold green]Requested command[/bold green]: [bold yellow]{run_cmd}[/bold yellow]"
     )
