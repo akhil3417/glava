@@ -20,16 +20,13 @@ The Assistant is designed to provide an intuitive, user-friendly interface for i
 
 1. Voice Recognition: Utilizes AI-based voice recognition technology to understand user commands.
 2. Text Processing: The assistant uses natural language processing to understand and respond to user queries.
-3. Speech Synthesis: The assistant synthesizes speech in response to user commands.
-4. Browser Automation: The assistant can control web browsers, including performing searches, opening web pages, and more.
-5. Wikipedia Information Retrieval: The assistant can provide information from Wikipedia.
-6. Weather Information Retrieval (OpenWeather API): The assistant can provide current weather conditions and forecasts.
-7. News Headline Retrieval: The assistant can provide the latest headlines from various news sources.
-8. Linux System Information Retrieval: The assistant can provide system information about the Linux system it's installed on.
-9. Music Playback: The assistant can play music from youthubbbe sources.
-10. Voice Model Selection: Users can choose between different voice models for better recognition accuracy.
-11. Speech Recognition and Synthesis Control: Users can toggle the assistant's speech recognition and synthesis on or off.
-12. Random Voice Output (only if PIPER_HTTP_SERVER=False): The assistant can respond with random voices to make the interaction more engaging.
+3. Browser Automation: The assistant can open web browser, including performing searches, opening web pages.
+4. Wikipedia Information Retrieval: The assistant can provide information from Wikipedia.
+5. Weather Information Retrieval (OpenWeather API): The assistant can provide current weather conditions and forecasts.
+6. News Headline Retrieval: The assistant can provide the latest headlines from various news sources(News API).
+7. Music Playback: The assistant can play music from youthubbbe sources.
+8. Voice Model Selection: Users can choose between different voice models for better recognition accuracy.
+9. Random Voice Output (only if PIPER_HTTP_SERVER=False): The assistant can respond with random voices to make the interaction more engaging.
 
 ## Installation
 
