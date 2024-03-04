@@ -20,8 +20,9 @@ def search_on_wikipedia(query):
 async def wikipedia_command_async():
     query = await take_command()  # Await take_command() here
     print(f"Searching on Wikipedia for", query)
-    results = search_on_wikipedia(query)
-    speak_or_print("Here's a quick summary from Wikipedia.\n")
+    results = search_on_wikipedia(query).replace('"', "")
+    speak_or_print("Heres a quick summary from Wikipedia.\n")
+    print(results)
     speak_or_print(results)
 
 
