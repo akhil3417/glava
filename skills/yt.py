@@ -123,9 +123,16 @@ def play(media_url: str, options: str):
         media_url (str): command line arguments to the player
         options (str): URL of media to play
     """
-    run(
-        [str(CONST["media_player"]), *shlex.split(options), media_url]
-    ).check_returncode()
+    # run(
+    #     [str(CONST["media_player"]), *shlex.split(options), media_url]
+    # ).check_returncode()
+
+    subprocess.Popen(
+        [str(CONST["media_player"]), *shlex.split(options), media_url],
+        shell=False,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
 
 
 def getopts() -> argparse.Namespace:
