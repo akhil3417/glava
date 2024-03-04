@@ -15,11 +15,11 @@ def play_song_and_write_transcript(song_to_play):
         f.write(song_to_play)
 
     # # Define default script
-    script = "y"
+    script = "../scripts/yt"
 
     # If "audio" keyword is in the transcript.txt , use 'vosk_music' script
     if "audio" in song_to_play.lower():
-        script = "/home/shiva/.local/bin/vosk-music"
+        script = "../scripts/vosk-music"
     # Run music script
     # subprocess.run([script, song_to_play], check=True)
     start_process([script, song_to_play])
