@@ -8,7 +8,6 @@ from utils.input_output import (
 )
 
 
-
 DEFAULT_BROWSER = shlex.split(BROWSER) + shlex.split(
     PROFILE
 )  # This will also be a list of arguments
@@ -63,5 +62,3 @@ async def query_web_command_async():
     speak_or_print("What do you want to search for?")
     query = await take_command()
     web_search(query)
-
-
