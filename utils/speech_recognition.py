@@ -10,7 +10,7 @@ async def listen(uri, is_listening):
     aplay_check = subprocess.run(["pgrep", "-x", "aplay"], capture_output=True)
     while aplay_check.returncode == 0:
         # If aplay is running, wait for it to complete
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         # Re-check
         aplay_check = subprocess.run(["pgrep", "-x", "aplay"], capture_output=True)
 
