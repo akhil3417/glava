@@ -37,7 +37,6 @@ VOSK_WEBSOCKET_SERVER = config["SERVICES"].getboolean("vosk_websocket_server")
 IS_RANDOM_VOICE = config["SERVICES"].getboolean("is_random_voice")
 
 # Other settings
-TERMINAL = config["OTHER_SETTINGS"]["terminal"]
 NEWS_HEADLINES_NUMBER = int(config["OTHER_SETTINGS"]["news_headlines_number"])
 CITY = config["OTHER_SETTINGS"]["city"]
 COUNTRY = config["OTHER_SETTINGS"]["country"]
