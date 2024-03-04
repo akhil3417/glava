@@ -12,6 +12,7 @@ import queue
 
 from vosk import Model, KaldiRecognizer
 
+
 def int_or_str(text):
     """Helper function for argument parsing."""
     try:
@@ -19,15 +20,18 @@ def int_or_str(text):
     except ValueError:
         return text
 
+
 def callback(indata, frames, time, status):
     """This is called (from a separate thread) for each audio block."""
     loop.call_soon_threadsafe(audio_queue.put_nowait, bytes(indata))
 
+
 async def serve_client(websocket, path):
     clients.add(websocket)
-    print ("Client connected from", websocket)
+    print("Client connected from", websocket)
     await websocket.wait_closed()
     clients.remove(websocket)
+
 
 async def recognize_microphone():
     global audio_queue
@@ -37,8 +41,14 @@ async def recognize_microphone():
 
     while True:
         if clients:
-            with sd.RawInputStream(samplerate=args.samplerate, blocksize=8000, device=args.device, dtype='int16',
-                                   channels=1, callback=callback) as device:
+            with sd.RawInputStream(
+                samplerate=args.samplerate,
+                blocksize=8000,
+                device=args.device,
+                dtype="int16",
+                channels=1,
+                callback=callback,
+            ) as device:
                 rec = KaldiRecognizer(model, device.samplerate)
                 while clients:  # Continue recognition while clients are connected
                     data = await audio_queue.get()
@@ -52,31 +62,53 @@ async def recognize_microphone():
         else:
             await asyncio.sleep(0.2)
 
-async def main():
 
+async def main():
     global args
     global clients
     global loop
 
     parser = argparse.ArgumentParser(add_help=False)
-    parser.add_argument('-l', '--list-devices', action='store_true',
-                        help='show list of audio devices and exit')
+    parser.add_argument(
+        "-l",
+        "--list-devices",
+        action="store_true",
+        help="show list of audio devices and exit",
+    )
     args, remaining = parser.parse_known_args()
     if args.list_devices:
         print(sd.query_devices())
         parser.exit(0)
-    parser = argparse.ArgumentParser(description="ASR Server",
-                                     formatter_class=argparse.RawDescriptionHelpFormatter,
-                                     parents=[parser])
-    parser.add_argument('-m', '--model', type=str, metavar='MODEL_PATH',
-                        help='Path to the model', default='model')
-    parser.add_argument('-i', '--interface', type=str, metavar='INTERFACE',
-                        help='Bind interface', default='0.0.0.0')
-    parser.add_argument('-p', '--port', type=int, metavar='PORT',
-                        help='Port', default=2700)
-    parser.add_argument('-d', '--device', type=int_or_str,
-                        help='input device (numeric ID or substring)')
-    parser.add_argument('-r', '--samplerate', type=int, help='sampling rate', default=16000)
+    parser = argparse.ArgumentParser(
+        description="ASR Server",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        parents=[parser],
+    )
+    parser.add_argument(
+        "-m",
+        "--model",
+        type=str,
+        metavar="MODEL_PATH",
+        help="Path to the model",
+        default="model",
+    )
+    parser.add_argument(
+        "-i",
+        "--interface",
+        type=str,
+        metavar="INTERFACE",
+        help="Bind interface",
+        default="0.0.0.0",
+    )
+    parser.add_argument(
+        "-p", "--port", type=int, metavar="PORT", help="Port", default=2700
+    )
+    parser.add_argument(
+        "-d", "--device", type=int_or_str, help="input device (numeric ID or substring)"
+    )
+    parser.add_argument(
+        "-r", "--samplerate", type=int, help="sampling rate", default=16000
+    )
     args = parser.parse_args(remaining)
 
     logging.basicConfig(level=logging.INFO)
@@ -87,7 +119,9 @@ async def main():
 
     await asyncio.gather(
         websockets.serve(serve_client, args.interface, args.port),
-                         recognize_microphone())
+        recognize_microphone(),
+    )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(main())
