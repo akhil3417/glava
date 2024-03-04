@@ -86,7 +86,7 @@ PIPER_HTTP_SERVER_SCRIPT = os.path.abspath(
 )
 VOSK_MODELS_DIR = os.path.join(BASE_DIR, "extensions/vosk/")
 VOSK_WEBSOCKET_SCRIPT = os.path.join(BASE_DIR, "scripts/vosk_rest_websocket.py")
-VOSK_MODEL = "vosk-model-en-in-0.5"
+VOSK_MODEL = "vosk-model-small-en-us-0.15"
 
 
 # script arguments
