@@ -1,12 +1,13 @@
 #!/bin/bash
 
-#Create virtualenv
+#Create and activate virtualenv
 
-virtualenv .env
+virtualenv .env && . .env/bin/activate
 
-#activate virtualenv
-
-. .env/bin/activate
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo "Virtual environment is not active."
+    exit 1
+fi
 
 # install python packages
 pip install -r requirements.txt
