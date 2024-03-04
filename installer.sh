@@ -11,6 +11,9 @@ fi
 # install python packages
 pip install -r requirements.txt
 
+# add custom roles to shellgpt roles
+cp ./scripts/jarvis.json ~/.config/shell_gpt/roles/
+
 # Create directories
 mkdir -p ./extensions/vosk
 mkdir -p ./extensions/piper
