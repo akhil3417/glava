@@ -122,6 +122,7 @@ async def handle_command(user_input):
         # terminal
         #
         "jarvis": sgpt_shell_ai,
+        "terminal": term_sgpt,
         "term": term_sgpt,
         # browser
         #
@@ -133,7 +134,7 @@ async def handle_command(user_input):
         #
         "google news": google_news_command,
         "get news": read_news,
-        "search wikipedia": wikipedia_command_async,
+        "wikipedia": wikipedia_command_async,
         # weather
         #
         "weather": weather_report_command,
