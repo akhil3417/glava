@@ -46,6 +46,7 @@ from rich.prompt import Prompt
 import typer
 
 from skills.music import stream_yt
+import socket
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
@@ -184,11 +185,20 @@ async def handle_command(user_input):
                 raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
 
     generate_response(user_input)
+def is_port_open(host, port):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    try:
+        s.connect((host, int(port)))
+        s.shutdown(2)
+        return True
+    except:
+        return False
 
 
 async def voice_sgpt(IS_LISTENING):
     start_vosk_service_command()
-    await asyncio.sleep(1.5)
+    while not is_port_open("localhost", 2700):
+        await asyncio.sleep(1)
     while True:
         IS_LISTENING = True
         try:
