@@ -122,7 +122,6 @@ async def handle_command(user_input):
         # terminal
         #
         "jarvis": sgpt_shell_ai,
-        "terminal": term_sgpt,
         "term": term_sgpt,
         # browser
         #
@@ -135,8 +134,11 @@ async def handle_command(user_input):
         "google news": google_news_command,
         "get news": read_news,
         "search wikipedia": wikipedia_command_async,
-        #  FIXME 2024-03-01: choose if use a city var , or extract from user_input
+        # weather
+        #
         "weather": weather_report_command,
+        # wolframalpha
+        #
         "calculate": calculate_wolframe,
         "alpha": what_is_wolframe,
         # linux
