@@ -80,7 +80,12 @@ then you can start the project, execute the following command:
 python3 main.py
 ```
 
-You can now interact with the project using voice commands.
+
+All the user queries are match with keys in commands dictionary , if it exists then the corresponding function is executed , if nothing matches shellgpt takes over.
+
+For more info , see the commands dict in main.py.
+
+You can now interact with the project using voice commands or your keystrokes.
 
 ## Additional Configuration
 
