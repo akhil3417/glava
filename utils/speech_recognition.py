@@ -20,7 +20,10 @@ async def listen(uri, is_listening):
             try:
                 transcript = await websocket.recv()
                 transcript_dict = json.loads(transcript)
-                if "text" in transcript_dict and wakeword in transcript_dict["text"]:
+                if "text" in transcript_dict and (
+                    wakeword in transcript_dict["text"]
+                    or len(transcript_dict.get("text", "")) > 15
+                ):
                     transcript_dict["text"] = transcript_dict["text"].replace(
                         wakeword, ""
                     )
