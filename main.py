@@ -47,6 +47,7 @@ import typer
 
 from skills.music import stream_yt
 import socket
+from utils.shellgpt_check import shellgpt_check
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
@@ -113,6 +114,10 @@ class CommandHandlingError(Error):
 
     pass
 
+
+##Basic checks and services
+
+shellgpt_check()
 
 if PIPER_HTTP_SERVER:
     start_piper_tts_service()
