@@ -66,18 +66,10 @@ Follow these steps to install and set up the project:
 
 Make sure you have Shellgpt  up and running if not see [Shellgpt Installation](https://github.com/TheR1D/shell_gpt/tree/main#installation) .
 
-- Create a new chat using jarvis role.(make sure role exists , if not copy it from scripts/jarvis.json to your shellgpt roles dir)
+
+You can  now start the project with following command:
 
 ```
-sgpt --top-p "0.01" --temperature "0.32" --role jarvis --chat jarvis "who are you"'
-
-```
-
-
-then you can start the project, execute the following command:
-
-```
-
 ./start.sh
 
 or
