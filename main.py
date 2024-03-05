@@ -199,7 +199,7 @@ async def voice_sgpt(IS_LISTENING):
     start_vosk_service_command()
     while not is_port_open("localhost", 2700):
         await asyncio.sleep(1)
-        print("Listening")
+    print("Listening")
     while True:
         IS_LISTENING = True
         try:
