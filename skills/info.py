@@ -3,7 +3,7 @@ import threading
 import imdb
 import wikipedia
 import wolframalpha
-from config import WOLFRAMALPHA_API
+from config import WOLFRAMALPHA_API, VOICE
 from utils.input_output import speak_or_print, take_command
 
 
@@ -31,27 +31,25 @@ def movie_command():
     speak_or_print("Please tell me the movie name:")
     text = input().lower()
     movies = movies_db.search_movie(text)
-    speak_or_print("searching for" + text)
-    speak_or_print("I found these")
+    speak_or_print("searching for " + text)
     for movie in movies:
-        title = movie["title"]
+        title = movie["title"].replace('"', "").replace("'", "")
         year = movie["year"]
-        speak_or_print(f"{title}-{year}")
-        info = movie.getID()
+        info = movie.movieID
         movie_info = movies_db.get_movie(info)
         rating = movie_info["rating"]
         cast = movie_info["cast"]
-        actor = cast[0:5]
-        plot = movie_info.get("plot outline", "plot summary not available")
-        speak_or_print(
-            f"{title} was released in {year} has imdb ratings of {rating}.It has a cast of {actor}. "
-            f"The plot summary of movie is {plot}"
-        )
-
-        print(
-            f"{title} was released in {year} has imdb ratings of {rating}.\n It has a cast of {actor}. \n"
-            f"The plot summary of movie is {plot}"
-        )
+        actor = [str(actor) for actor in cast[:5]]
+        plot = movie_info.get("plot outline", "Plot summary not available")
+        plot = plot.replace('"', "").replace("'", "")
+        details = f"{title} was released in {year} and has an IMDB rating of {rating}. It stars {', '.join(actor)}. The plot summary of the movie is {plot}"
+        if VOICE:
+            print(details)
+            speak_or_print(details)
+            break
+        else:
+            print(details)
+            break
 
 
 def calculate_wolframe(user_input):
