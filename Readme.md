@@ -36,6 +36,9 @@ Before you begin, ensure you have met the following requirements:
 - Python 3.6 or higher.
 - pip.
 - Gnu/Linux system.
+- yt-dlp (for music)
+- mpv
+- Shellgpt
 
 ### Installation Steps
 
