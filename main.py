@@ -185,6 +185,8 @@ async def handle_command(user_input):
                 raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
 
     generate_response(user_input)
+
+
 def is_port_open(host, port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
