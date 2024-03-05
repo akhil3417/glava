@@ -149,7 +149,7 @@ async def handle_command(user_input):
         # aud & vid
         #
         "play": stream_yt,
-        # "movie": movie_command,
+        "movie": movie_command,
         # "send an email": send_email_command,
         #
         # assistant controls
