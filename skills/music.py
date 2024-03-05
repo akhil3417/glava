@@ -1,17 +1,20 @@
 import subprocess
 from shutil import which
-import re
+from urllib.parse import urlparse, parse_qs
 
 from utils.input_output import speak_or_print, take_command
-
 from .yt import get_media_url, play
+
+
+def get_video_id(url):
+    query = urlparse(url).query
+    params = parse_qs(query)
+    return params["v"][0]
 
 
 def play_audio(user_input):
     media_url = get_media_url(user_input, 1)
-
-    # Extract the video ID from the URL using regex
-    video_id = re.search(r"v=(\w+)", media_url).group(1)
+    video_id = get_video_id(media_url)
 
     # check if mpc is available
     mpc = which("mpc")
@@ -33,6 +36,9 @@ def play_audio(user_input):
     )
 
     subprocess.call(cmd)
+    # if we are using mpc, play the playlist
+    if mpc is not None:
+        subprocess.call([mpc, "play"])
 
 
 def play_video(user_input):
