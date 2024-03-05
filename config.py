@@ -21,6 +21,7 @@ USER = config["USER"]["name"]
 HOSTNAME = config["USER"]["hostname"]
 EMAIL = config["USER"]["email"]
 PASSWORD = config["USER"]["password"]
+WAKEWORD = config["USER"]["wakeword"]
 
 # API keys
 NEWS_API_KEY = config["API_KEYS"]["news_api_key"]

@@ -3,6 +3,7 @@ import logging
 import json
 import asyncio
 import subprocess
+from config import WAKEWORD as wakeword
 
 
 async def listen(uri, is_listening):
@@ -19,8 +20,11 @@ async def listen(uri, is_listening):
             try:
                 transcript = await websocket.recv()
                 transcript_dict = json.loads(transcript)
-                # if 'text' in transcript_dict and transcript_dict['text'].startswith("hey"):
-                if len(transcript_dict.get("text", "")) > 4 and "text" in transcript:
+                if "text" in transcript_dict and wakeword in transcript_dict["text"]:
+                    transcript_dict["text"] = transcript_dict["text"].replace(
+                        wakeword, ""
+                    )
+
                     with open("/tmp/transcript.txt", "w") as f:
                         f.write(transcript_dict["text"])
                     print(f"User:", transcript_dict["text"])
