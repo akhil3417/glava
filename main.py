@@ -227,7 +227,9 @@ async def handle_async_function(func, *args):
 
 async def interactive_sgpt():
     while True:
-        user_input = typer.prompt(">>>", prompt_suffix=" ")
+        user_input = typer.prompt(">>>", prompt_suffix=" ").replace(
+            "'", ""
+        )  # remove upperquotes
         if user_input.lower() == "exit":
             break
         if user_input.lower() == "cls":
