@@ -2,12 +2,17 @@
 import argparse
 import asyncio
 import os
+import socket
 from datetime import datetime
 
+import typer
 from pynput import keyboard
+from rich import print as rich_print
+from rich.prompt import Prompt
+from rich.rule import Rule
 
 # Import necessary modules
-from config import HOSTNAME, IS_LISTENING, USER, VOICE_MODELS, PIPER_HTTP_SERVER
+from config import HOSTNAME, IS_LISTENING, PIPER_HTTP_SERVER, USER, VOICE_MODELS
 from skills.browser import (
     open_browser_command,
     open_websites,
@@ -20,33 +25,26 @@ from skills.info import (
     what_is_wolframe,
     wikipedia_command_async,
 )
-from skills.weather import weather_report_command
-from skills.news import google_news_command, read_news
 from skills.linux import ip_address_command_async
+from skills.music import stream_yt
+from skills.news import google_news_command, read_news
+from skills.weather import weather_report_command
 
 # from skills.music import play_song, run_stream_command_async
-from utils.command_handlers import term_sgpt, sgpt_shell_ai
-from utils.services import start_piper_tts_service, start_vosk_service_command
-from utils.memory_consumption import tell_memory_consumption
+from utils.command_handlers import sgpt_shell_ai, term_sgpt
 from utils.input_output import (
+    change_voice_model_command,
     generate_response,
     get_transcript,
     start_listening,
     toggle_is_listening_command,
+    toggle_piper_http_server_command,
     toggle_random_voice_command,
     toggle_voice_command,
-    change_voice_model_command,
-    toggle_piper_http_server_command,
     toggle_vosk_websocket_server_command,
 )
-
-from rich import print as rich_print
-from rich.rule import Rule
-from rich.prompt import Prompt
-import typer
-
-from skills.music import stream_yt
-import socket
+from utils.memory_consumption import tell_memory_consumption
+from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.shellgpt_check import shellgpt_check
 
 # Parse command-line arguments
