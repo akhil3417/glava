@@ -1,4 +1,4 @@
-# Project Name: Gnu/Linux-ai-voice-assistant
+# Project Name: Gnu/Linux-ai-voice-assistant(GLAVA)
 
 Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open source tools, offering a seamless interaction with a variety of services and features. This project uses several extensions to provide voice-based interactions. The main components are:
 
@@ -16,17 +16,57 @@ Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open
 
 ## Description
 
-The Assistant is designed to provide an intuitive, user-friendly interface for interacting with various services and features. Its main components include:
+This project is an AI-assistant that employs the ShellGPT to query Large Language Models (LLMs) and respond accordingly in both text and voice formats. It offers a variety of functionalities such as voice and keystroke queries, integration with WolframAlpha for complex calculations and news search from various sources, and the ability to query and play songs and videos.
 
-1. Voice Recognition: Utilizes AI-based voice recognition technology to understand user commands.
-2. Text Processing: The assistant uses natural language processing to understand and respond to user queries.
-3. Browser Automation: The assistant can open web browser, including performing searches, opening web pages.
-4. Wikipedia Information Retrieval: The assistant can provide information from Wikipedia.
-5. Weather Information Retrieval (OpenWeather API): The assistant can provide current weather conditions and forecasts.
-6. News Headline Retrieval: The assistant can provide the latest headlines from various news sources(News API).
-7. Music Playback: The assistant can play music from youthubbbe sources.
-8. Voice Model Selection: Users can choose between different voice models for better recognition accuracy.
-9. Random Voice Output (only if PIPER_HTTP_SERVER=False): The assistant can respond with random voices to make the interaction more engaging.
+GLAVA is not just a tool for passing the Turing test, it's a dynamic command-line assistant, ready to assist you with a multitude of tasks and queries. At its heart lies the power of Large Language Models (LLMs), a sea of knowledge waiting to be harnessed.
+
+### Unleashing the Power of LLMs
+
+GLAVA harnesses the power of LLMs to provide a wide array of functionalities. Whether you prefer to interact with it using keystrokes or voice, GLAVA has your back. It responds in both text and voice format, ensuring a seamless interaction.
+
+### Voice and Keystroke Interaction
+
+GLAVA allows you to dictate your commands using voice, or type them out. It features Vosk, a lightweight and efficient offline speech recognition engine that can be run as a REST websocket.
+
+### The Master of Text-to-Speech
+
+For your ears to be satisfied, GLAVA is not just a talker, it's a master of Text-to-Speech (TTS). It uses Piper, a powerful tool that can be used with HTTP websockets, where text is curled to get voice, or by using the Piper binary.
+
+### Voice Recognition 
+
+For voice recognition, we use Vosk, a free and open-source toolkit for speech recognition. Vosk runs as a REST websocket, ensuring accurate and real-time transcription. 
+
+### Information Retrieval
+
+Our Assistant can pull information from various sources, including WolframAlpha, Google News, and NewsAPI.org. You can query for news, and get the result in both text and voice format, making learning and staying updated a delightful journey.
+
+### Wolfram Alpha and Google News Integration
+
+For information and calculations beyond your comprehension, GLAVA uses Wolfram Alpha and Google News. 
+
+
+### Command Generation and Execution
+
+GLAVA is not just a tool for information retrieval. It can generate shell commands and execute them, allowing you to edit, abort, and execute commands with ease. It's like having a personal assistant, ready to help you out with tasks that might otherwise take time and effort.
+
+### Browsing Made Effortless
+
+GLAVA can open a web browser to various websites, making your browsing experience a breeze. It can search various websites and Wikipedia for information, providing you with the information you need, when you need it.
+
+Browse your favorite websites like YouTube, GitHub, Wikipedia, Amazon, and Reddit, or use DuckDuckGo with custom search parameters as the default search engine.
+
+### Youtube Video Playback
+
+GLAVA can play any song or video from YouTube sources, using yt-dlp, mpd, and mpv. It can play them in both audio and video format, making it your personal playlist creator.
+
+### IMDb Movie Querying
+
+GLAVA can query information about any movie from IMDb, providing you with a wealth of information about the movie, including its plot, cast, and ratings.
+
+GLAVA is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
+
+In essence, our Assistant is your one-stop solution for all your information and entertainment needs. With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
+
 
 ## Installation
 
