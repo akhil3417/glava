@@ -22,7 +22,7 @@ async def listen(uri, is_listening):
                 transcript_dict = json.loads(transcript)
                 if "text" in transcript_dict and (
                     wakeword in transcript_dict["text"]
-                    or len(transcript_dict.get("text", "")) > 15
+                    or len(transcript_dict.get("text", "")) > 20
                 ):
                     transcript_dict["text"] = transcript_dict["text"].replace(
                         wakeword, ""
