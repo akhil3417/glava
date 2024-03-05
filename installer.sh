@@ -42,3 +42,4 @@ fi
 
 # Make necessary files executable
 chmod +x ./extensions/piper/piper
+chmod +x ./start.sh

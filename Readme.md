@@ -77,7 +77,14 @@ sgpt --top-p "0.01" --temperature "0.32" --role jarvis --chat jarvis "who are yo
 then you can start the project, execute the following command:
 
 ```
+
+./start.sh
+
+or
+
+. .env/bin/activate
 python3 main.py
+
 ```
 
 
