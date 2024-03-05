@@ -206,6 +206,8 @@ async def voice_sgpt(IS_LISTENING):
             listen_task = await start_listening("ws://localhost:2700", IS_LISTENING)
             await listen_task
             user_input = get_transcript()
+            if "stop listening" in get_transcript():
+                break
             await handle_command(user_input)
         except Exception as e:
             raise VoiceInputError("An error occurred in voice_sgpt:", e)
