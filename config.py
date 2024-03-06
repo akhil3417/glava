@@ -52,6 +52,7 @@ SHOW_CHAT_HISTORY = config["OTHER_SETTINGS"].getboolean("chat_history")
 BROWSER = config["Browser"]["browser"]
 PROFILE = config["Browser"]["profile"]
 
+
 # Directories
 BASE_DIR = os.path.abspath(
     os.path.dirname(__file__)
