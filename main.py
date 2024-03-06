@@ -104,13 +104,6 @@ class CommandHandlingError(Error):
     pass
 
 
-##Basic checks and services
-
-
-if PIPER_HTTP_SERVER:
-    start_piper_tts_service()
-
-
 async def handle_command(user_input):
     commands = {
         # terminal
@@ -221,8 +214,12 @@ if VOICE:
     if not ensure_piper_model(voice_model):
         console.print(f"The voice model file is missing.", style="red")
         raise SystemExit
-#
+# checks
 shellgpt_check()
+
+# start piper
+if PIPER_HTTP_SERVER:
+    start_piper_tts_service()
 
 
 async def interactive_sgpt():
