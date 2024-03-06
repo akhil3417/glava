@@ -273,14 +273,16 @@ async def interactive_sgpt():
         if user_input.lower() == "exit":
             break
         if user_input.lower() == "cls":
-            os.system("clear")
+            os.system("clear")  # clear the console
         elif user_input.lower() == "v":
+            # handle voice input with voice_sgpt
             try:
                 await handle_async_function(voice_sgpt, IS_LISTENING)
                 # await voice_sgpt(IS_LISTENING)
             except CommandHandlingError as e:
                 console.print(f"An error occurred: {e}", style="red")
         else:
+            # handle user command
             try:
                 await handle_async_function(handle_command, user_input)
                 # await handle_command(user_input)
