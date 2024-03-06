@@ -8,6 +8,11 @@ logging.basicConfig(level=logging.INFO)
 
 # Function to get config
 def get_config():
+    """
+    Function to get the configuration from the config.ini file.
+    Returns:
+        configparser.ConfigParser: The configuration object.
+    """
     config = configparser.ConfigParser()
     config.read("config.ini")
     return config
@@ -101,12 +106,18 @@ STARTUP_MESSAGES = [
 
 # Function to get SGPT arguments
 def get_sgpt_args():
+    """
+    Return the command line arguments for running the SGPT model.
+    """
     return "--top-p '0.01' --temperature '0.32' --no-cache --chat jarvis"
 
 
 # Function to get Jarvis prompt
 def get_jarvis_prompt():
     return "answer in less than 80 words , be consise ,clear , informative and dont point out spelling mistaks from the user: "
+    """
+    Return the prompt for JARVIS.
+    """
     # return "provide concise ,clear info , focusing only on the necessary information and not including any unnecessary information such as greetings or spelling mistakes from the user: "
 
 
