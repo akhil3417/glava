@@ -10,6 +10,7 @@ from pynput import keyboard
 from rich import print as rich_print
 from rich.prompt import Prompt
 from rich.rule import Rule
+from rich.console import Console
 
 # Import necessary modules
 from config import HOSTNAME, IS_LISTENING, PIPER_HTTP_SERVER, USER, VOICE_MODELS
@@ -54,6 +55,8 @@ args = parser.parse_args()
 
 # Get voice model from command-line arguments
 VOICE_MODEL = VOICE_MODELS[args.model]
+
+console = Console()
 
 
 def ensure_piper_models():
@@ -239,13 +242,13 @@ async def interactive_sgpt():
                 await handle_async_function(voice_sgpt, IS_LISTENING)
                 # await voice_sgpt(IS_LISTENING)
             except CommandHandlingError as e:
-                print(f"An error occurred: {e}")
+                console.print(f"An error occurred: {e}", style="red")
         else:
             try:
                 await handle_async_function(handle_command, user_input)
                 # await handle_command(user_input)
             except CommandHandlingError as e:
-                print(f"An error occurred: {e}")
+                console.print(f"An error occurred: {e}", style="red")
 
 
 if __name__ == "__main__":
