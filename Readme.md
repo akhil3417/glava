@@ -75,8 +75,7 @@ Before you begin, ensure you have met the following requirements:
 - Python 3.6 or higher.
 - pip.
 - Gnu/Linux system.
-- yt-dlp (for music)
-- mpv
+- mpv,mpd(for audio,optional),yt-dlp (for youuthube playback)
 - Shellgpt
 
 ### Installation Steps
