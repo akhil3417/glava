@@ -16,9 +16,11 @@ Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open
 
 ## Description
 
-This project is an AI-assistant that employs the ShellGPT to query Large Language Models (LLMs) and respond accordingly in both text and voice formats. It offers a variety of functionalities such as voice and keystroke queries, integration with WolframAlpha for complex calculations and news search from various sources, and the ability to query and play songs and videos.
+GLAVA is not just a tool for passing the Turing test, it's a dynamic command-line assistant, ready to assist you with a multitude of tasks and queries . At its heart lies the power of Large Language Models (LLMs), a sea of knowledge waiting to be harnessed. Glava can respond in both text and voice formats(using piper).
 
-GLAVA is not just a tool for passing the Turing test, it's a dynamic command-line assistant, ready to assist you with a multitude of tasks and queries. At its heart lies the power of Large Language Models (LLMs), a sea of knowledge waiting to be harnessed.
+GLAVA is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
+
+In essence, our Assistant is your one-stop solution for all your information and entertainment needs. With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
 
 ### Unleashing the Power of LLMs
 
@@ -32,18 +34,19 @@ GLAVA allows you to dictate your commands using voice, or type them out. It feat
 
 For your ears to be satisfied, GLAVA is not just a talker, it's a master of Text-to-Speech (TTS). It uses Piper, a powerful tool that can be used with HTTP websockets, where text is curled to get voice, or by using the Piper binary.
 
+Listen to voice samples [here](https://rhasspy.github.io/piper-samples/)
+
 ### Voice Recognition 
 
-For voice recognition, we use Vosk, a free and open-source toolkit for speech recognition. Vosk runs as a REST websocket, ensuring accurate and real-time transcription. 
+For voice recognition, we use [Vosk](https://alphacephei.com/vosk/), a free and open-source toolkit for speech recognition. Vosk runs as a REST websocket, ensuring accurate and real-time transcription. 
 
-### Information Retrieval
+### Wolfram Alpha 
 
-Our Assistant can pull information from various sources, including WolframAlpha, Google News, and NewsAPI.org. You can query for news, and get the result in both text and voice format, making learning and staying updated a delightful journey.
+User can query for information and calculations  using  Wolfram Alpha Api.
 
-### Wolfram Alpha and Google News Integration
+### NewsApi and Google News.
 
-For information and calculations beyond your comprehension, GLAVA uses Wolfram Alpha and Google News. 
-
+Glava can query for news from NewsAPI and Google News, and get the result in both text and voice format, making learning and staying updated a delightful journey.
 
 ### Command Generation and Execution
 
@@ -62,10 +65,6 @@ GLAVA can play any song or video from YouTube sources, using yt-dlp, mpd, and mp
 ### IMDb Movie Querying
 
 GLAVA can query information about any movie from IMDb, providing you with a wealth of information about the movie, including its plot, cast, and ratings.
-
-GLAVA is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
-
-In essence, our Assistant is your one-stop solution for all your information and entertainment needs. With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
 
 
 ## Installation
