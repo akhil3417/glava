@@ -18,8 +18,10 @@ from config import (
     IS_LISTENING,
     PIPER_HTTP_SERVER,
     USER,
+    VOICE,
     VOICE_MODELS,
     SHOW_CHAT_HISTORY,
+    voice_model,
 )
 from skills.browser import (
     open_browser_command,
@@ -68,13 +70,11 @@ VOICE_MODEL = VOICE_MODELS[args.model]
 console = Console()
 
 
-def ensure_piper_models():
-    for voice_model_key, voice_model_path in VOICE_MODELS.items():
-        if not os.path.exists(voice_model_path):
-            print(f"Voice model file not found at {voice_model_path}")
-
-
-# ensure_piper_models()
+def ensure_piper_model(voice_model):
+    if not os.path.exists(voice_model):
+        print(f"Voice model file not found at {voice_model}")
+        return False
+    return True
 
 
 # keyboard_listener = keyboard.GlobalHotKeys({
@@ -215,8 +215,17 @@ async def handle_async_function(func, *args):
         raise CommandHandlingError(f"An error occurred in {func.__name__}:", e)
 
 
+# run checks
+
+if VOICE:
+    if not ensure_piper_model(voice_model):
+        console.print(f"The voice model file is missing.", style="red")
+        raise SystemExit
+#
+shellgpt_check()
+
+
 async def interactive_sgpt():
-    shellgpt_check()
     if SHOW_CHAT_HISTORY:
         show_chat_history("jarvis")  # print the chat history when the program starts
     greet_user(USER, HOSTNAME)
