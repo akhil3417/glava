@@ -1,6 +1,7 @@
 # Project Name: Gnu/Linux-ai-voice-assistant(GLAVA)
 
-Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open source tools, offering a seamless interaction with a variety of services and features. This project uses several extensions to provide voice-based interactions. The main components are:
+Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open source tools, offering a seamless interaction with a llms, a variety of services and features.
+The main components of the Assistant are :
 
 - [Vosk](https://alphacephei.com/vosk/) - An open-source speech recognition toolkit.
 - [Piper](https://github.com/rhasspy/piper) - A fast, local neural text to speech system that sounds great.
@@ -28,7 +29,9 @@ GLAVA harnesses the power of LLMs to provide a wide array of functionalities. Wh
 
 ### Voice and Keystroke Interaction
 
-GLAVA allows you to dictate your commands using voice, or type them out. It features Vosk, a lightweight and efficient offline speech recognition engine that can be run as a REST websocket.
+GLAVA allows you to dictate your commands using voice, or type them out.
+
+For voice recognition, we use [Vosk](https://alphacephei.com/vosk/), a free. lightweight , efficient and open-source toolkit for speech recognition. Vosk runs as a REST websocket, ensuring accurate and real-time transcription. 
 
 ### The Master of Text-to-Speech
 
@@ -36,17 +39,13 @@ For your ears to be satisfied, GLAVA is not just a talker, it's a master of Text
 
 Listen to voice samples [here](https://rhasspy.github.io/piper-samples/)
 
-### Voice Recognition 
-
-For voice recognition, we use [Vosk](https://alphacephei.com/vosk/), a free and open-source toolkit for speech recognition. Vosk runs as a REST websocket, ensuring accurate and real-time transcription. 
-
 ### Wolfram Alpha 
 
 User can query for information and calculations  using  Wolfram Alpha Api.
 
 ### NewsApi and Google News.
 
-Glava can query for news from NewsAPI and Google News, and get the result in both text and voice format, making learning and staying updated a delightful journey.
+Glava can query for news from NewsAPI and Google News, and get the result in both text and voice format, making learning and staying updated in a delightful journey.
 
 ### Command Generation and Execution
 
