@@ -106,7 +106,6 @@ class CommandHandlingError(Error):
 
 ##Basic checks and services
 
-shellgpt_check()
 
 if PIPER_HTTP_SERVER:
     start_piper_tts_service()
@@ -217,6 +216,7 @@ async def handle_async_function(func, *args):
 
 
 async def interactive_sgpt():
+    shellgpt_check()
     if SHOW_CHAT_HISTORY:
         show_chat_history("jarvis")  # print the chat history when the program starts
     greet_user(USER, HOSTNAME)
