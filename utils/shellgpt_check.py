@@ -4,6 +4,9 @@ import subprocess
 
 
 def shellgpt_files_check():
+    """
+    Check the existence of required files for Shell GPT. If the required files do not exist, create them and copy contents from another file. 
+    """
     jarvis_role_file = os.path.expanduser("~/.config/shell_gpt/roles/jarvis.json")
     jarvis_chat_file = os.path.expanduser("~/.cache/shellgpt/jarvis")
     script_file = os.path.join(os.getcwd(), "scripts/jarvis.json")
@@ -20,6 +23,9 @@ def shellgpt_files_check():
 
 
 def shellgpt_check():
+    """
+    Check if the shellgpt files exist, and handle the case where they do not.
+    """
     try:
         shellgpt_files_check()
     except FileNotFoundError as e:
