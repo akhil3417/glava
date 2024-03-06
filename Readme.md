@@ -92,7 +92,7 @@ Follow these steps to install and set up the project:
 2. Navigate to the project directory:
 
    ```
-   cd gnu-linux-ai-voice-assistant
+   cd glava
    ```
 
 3. Run the installation script:
