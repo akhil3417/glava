@@ -55,6 +55,7 @@ from utils.memory_consumption import tell_memory_consumption
 from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.shellgpt_check import shellgpt_check
 from utils.chat_history import show_chat_history
+from utils.greetings import greet_user
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
@@ -75,27 +76,6 @@ def ensure_piper_models():
 
 # ensure_piper_models()
 
-
-def get_time_of_day():
-    hour = datetime.now().hour
-    if (hour >= 6) and (hour < 12):
-        return "Good morning"
-    elif (hour >= 12) and (hour <= 16):
-        return "Good afternoon"
-    elif (hour >= 16) and (hour < 19):
-        return "Good evening"
-    else:
-        return "Hello"
-
-
-def greet_me(USER, HOSTNAME):
-    time_of_day = get_time_of_day()
-    rich_print(
-        f"{time_of_day} [bold magenta]{USER}[/bold magenta]. I am [bold magenta]{HOSTNAME}[/bold magenta]. How may I assist you?"
-    )
-
-
-greet_me(USER, HOSTNAME)
 
 # keyboard_listener = keyboard.GlobalHotKeys({
 #     # '<ctrl>+<alt>+k': start_listening,
@@ -239,6 +219,7 @@ async def handle_async_function(func, *args):
 async def interactive_sgpt():
     if SHOW_CHAT_HISTORY:
         show_chat_history("jarvis")  # print the chat history when the program starts
+    greet_user(USER, HOSTNAME)
     while True:
         user_input = typer.prompt(">>>", prompt_suffix=" ").replace(
             "'", ""
