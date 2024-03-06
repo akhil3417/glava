@@ -71,6 +71,15 @@ console = Console()
 
 
 def ensure_piper_model(voice_model):
+    """
+    Ensure the existence of a voice model file.
+
+    Parameters:
+    voice_model (str): The path to the voice model file.
+
+    Returns:
+    bool: True if the voice model file exists, otherwise False.
+    """
     if not os.path.exists(voice_model):
         print(f"Voice model file not found at {voice_model}")
         return False
@@ -105,6 +114,12 @@ class CommandHandlingError(Error):
 
 
 async def handle_command(user_input):
+    """
+    Handle user input and execute the corresponding command , based on key(user_input) and value(command) pair.
+
+    Args:
+    user_input (str): The user input to be processed.
+    """
     commands = {
         # terminal
         #
@@ -174,6 +189,16 @@ async def handle_command(user_input):
 
 
 def is_port_open(host, port):
+    """
+    Check if a given host and port combination is open for communication.
+
+    Args:
+        host (str): The host to check for open port.
+        port (int): The port number to check for availability.
+
+    Returns:
+        bool: True if the port is open, False otherwise.
+    """
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         s.connect((host, int(port)))
@@ -184,6 +209,10 @@ def is_port_open(host, port):
 
 
 async def voice_sgpt(IS_LISTENING):
+    """
+    Asynchronous function for voice recognition using Vosk.
+    It takes a boolean parameter IS_LISTENING.
+    """
     start_vosk_service_command()
     while not is_port_open("localhost", 2700):
         await asyncio.sleep(1)
@@ -202,6 +231,17 @@ async def voice_sgpt(IS_LISTENING):
 
 
 async def handle_async_function(func, *args):
+    """
+    An asynchronous function that handles the execution of the input function with the provided arguments.
+    It catches any exceptions raised during the execution and raises a CommandHandlingError with an appropriate message.
+
+    Parameters:
+    - func: The function to be executed asynchronously.
+    - *args: The arguments to be passed to the function.
+
+    Returns:
+    This function does not return anything directly, but it may raise a CommandHandlingError if an exception occurs during the execution of the input function.
+    """
     try:
         await func(*args)
     except Exception as e:
