@@ -17,11 +17,12 @@ The main components of the Assistant are :
 
 ## Description
 
-GLAVA is not just a tool for passing the Turing test, it's a dynamic command-line assistant, ready to assist you with a multitude of tasks and queries . At its heart lies the power of Large Language Models (LLMs), a sea of knowledge waiting to be harnessed. Glava can respond in both text and voice formats(using piper).
+GLAVA is not just a tool for passing the Turing test, it's a dynamic command-line assistant, ready to assist you with a multitude of tasks and queries . At its heart lies the power of Large Language Models (LLMs), a sea of knowledge waiting to be harnessed.
 
-GLAVA is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
+Its is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
 
-In essence, our Assistant is your one-stop solution for all your information and entertainment needs. With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
+With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
+
 
 ### Unleashing the Power of LLMs
 
