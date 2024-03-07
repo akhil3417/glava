@@ -34,19 +34,19 @@ OPENWEATHER_APP_ID = config["API_KEYS"]["openweather_app_id"]
 WOLFRAMALPHA_API = config["API_KEYS"]["wolframalpha_api"]
 
 
-# services
-IS_LISTENING = config["SERVICES"].getboolean("is_listening")
-SCREEN_PRINT = config["SERVICES"].getboolean("screen_print")
-VOICE = config["SERVICES"].getboolean("voice")
-PIPER_HTTP_SERVER = config["SERVICES"].getboolean("piper_http_server")
-VOSK_WEBSOCKET_SERVER = config["SERVICES"].getboolean("vosk_websocket_server")
-IS_RANDOM_VOICE = config["SERVICES"].getboolean("is_random_voice")
+# Assistant Settings and services
+IS_LISTENING = config["ASSISTANT_SETTINGS"].getboolean("is_listening")
+SCREEN_PRINT = config["ASSISTANT_SETTINGS"].getboolean("screen_print")
+VOICE = config["ASSISTANT_SETTINGS"].getboolean("voice")
+PIPER_HTTP_SERVER = config["ASSISTANT_SETTINGS"].getboolean("piper_http_server")
+VOSK_WEBSOCKET_SERVER = config["ASSISTANT_SETTINGS"].getboolean("vosk_websocket_server")
+IS_RANDOM_VOICE = config["ASSISTANT_SETTINGS"].getboolean("is_random_voice")
+SHOW_CHAT_HISTORY = config["ASSISTANT_SETTINGS"].getboolean("show_chat_history")
 
 # Other settings
 NEWS_HEADLINES_NUMBER = int(config["OTHER_SETTINGS"]["news_headlines_number"])
 CITY = config["OTHER_SETTINGS"]["city"]
 COUNTRY = config["OTHER_SETTINGS"]["country"]
-SHOW_CHAT_HISTORY = config["OTHER_SETTINGS"].getboolean("chat_history")
 
 # browser specific
 BROWSER = config["Browser"]["browser"]
