@@ -5,10 +5,8 @@ from rich import print
 from rich.prompt import Prompt
 from prompt_toolkit import prompt
 
-# from skills.online import send_email
 from .input_output import (
     send_notification,
-    speak_or_print,
     start_process,
     run_shell_command_and_return_output,
 )
@@ -110,5 +108,3 @@ def term_sgpt(user_input):
         else:
             print("[bold red]Aborting.[/bold red]")
             return None
-
-
