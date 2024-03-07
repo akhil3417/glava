@@ -60,6 +60,15 @@ def toggle_voice_command():
 
 
 def speaker_ids(voice_model):
+    """
+    Function to retrieve speaker ids based on the provided voice model.
+
+    Args:
+    voice_model (str): The voice model for which speaker ids are to be retrieved.
+
+    Returns:
+    str or None: Randomly selected speaker ids if the voice model is found in the SPEAKER_IDS dictionary, otherwise None.
+    """
     voice_model = os.path.basename(
         voice_model
     )  # Strip the path from the voice_model value
@@ -70,6 +79,9 @@ def speaker_ids(voice_model):
 
 
 def get_audio_stream(json_input=False):
+    """
+    Function to get the audio stream with optional JSON input.
+    """
     global voice_model
     command = f"{PIPER_EXECUTABLE} --model {voice_model}"
     if IS_RANDOM_VOICE:
@@ -84,6 +96,17 @@ def get_audio_stream(json_input=False):
 
 
 def speak_or_print(text, VOICE=None, json_input=False):
+    """
+    A function to either speak or print the given text based on the specified parameters.
+
+    Args:
+        text (str): The text to be spoken or printed.
+        VOICE (str, optional): The voice to be used for speaking. Defaults to None.
+        json_input (bool, optional): Flag indicating whether the input is in JSON format. Defaults to False.
+
+    Returns:
+        None
+    """
     if PIPER_HTTP_SERVER:
         command = f"curl -G --data-urlencode 'text={text}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
         subprocess.run(command, shell=True, check=True, input=text, text=True)
@@ -101,6 +124,12 @@ def speak_or_print(text, VOICE=None, json_input=False):
 
 
 def speak(text, json_input=False):
+    """
+    A function that speaks the given text using audio stream, with an option to provide input as JSON.
+    Parameters:
+        text (str): The text to be spoken.
+        json_input (bool, optional): Flag to indicate if the input is in JSON format. Defaults to False.
+    """
     command = get_audio_stream(json_input)
     try:
         subprocess.run(command, shell=True, check=True, input=text, text=True)
@@ -109,6 +138,9 @@ def speak(text, json_input=False):
 
 
 def get_transcript():
+    """
+    Function to retrieve the content of the transcript file.
+    """
     try:
         with open("/tmp/transcript.txt", "r") as f:
             return f.read().replace("'", "")
@@ -118,6 +150,15 @@ def get_transcript():
 
 
 async def ask_for_input(user_input):
+    """
+    Asynchronous function to ask for user input, start listening in the background, and return the user input.
+
+    Parameters:
+    user_input: str - The user input to be processed.
+
+    Returns:
+    str - The user input after processing.
+    """
     # Run listen function in the background
     global listen_task
     listen_task = await start_listening("ws://localhost:2700", True)
@@ -129,6 +170,15 @@ async def ask_for_input(user_input):
 
 
 def generate_response(user_input):
+    """
+    Function to generate a response based on user input.
+
+    Args:
+        user_input: The input provided by the user.
+
+    Returns:
+        None
+    """
     # speak_or_print(random.choice(STARTUP_MESSAGES))
     # Kill all 'aplay' processes
     if is_aplay_running():
@@ -152,6 +202,18 @@ def generate_response(user_input):
 def start_process(
     cmd, shell=False, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
 ):
+    """
+    Function to start a process with the given command and optional parameters.
+
+    Args:
+        cmd (str): The command to be executed.
+        shell (bool, optional): Whether to use the shell as the program to execute. Defaults to False.
+        stdout (file, optional): A file object to redirect the standard output to. Defaults to subprocess.DEVNULL.
+        stderr (file, optional): A file object to redirect the standard error to. Defaults to subprocess.STDOUT.
+
+    Returns:
+        None
+    """
     try:
         subprocess.Popen(cmd, shell=shell, stdout=stdout, stderr=stderr)
         # subprocess.run(cmd, shell=True, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
@@ -168,6 +230,20 @@ def run_shell_command_and_return_output(
     stderr=subprocess.STDOUT,
     print_output=False,
 ):
+    """
+    Run a shell command and return the output.
+
+    Args:
+        cmd (str): The shell command to be executed.
+        shell (bool, optional): Whether to use the shell as the program to execute. Defaults to False.
+        stdout: Where to redirect the standard output. Defaults to subprocess.PIPE.
+        stderr: Where to redirect the standard error. Defaults to subprocess.STDOUT.
+        print_output (bool, optional): Whether to print the output. Defaults to False.
+
+    Returns:
+        None: If an error occurs.
+        tuple: The exit code and output if print_output is False.
+    """
     try:
         process = subprocess.Popen(
             cmd,
@@ -189,17 +265,33 @@ def run_shell_command_and_return_output(
 
 
 async def input_without_listen(user_input):
+    """
+    Asynchronous function to get user input without blocking the event loop.
+
+    Args:
+        user_input: The input prompt for the user.
+
+    Returns:
+        The user input provided by the user.
+    """
     user_input = await asyncio.to_thread(input, "Enter Query:")
     #     user_input = input("Enter:")
     return user_input
 
 
 async def input_with_listen(user_input):
+    """
+    Asynchronously prompts the user for input while displaying the message "Listening:".
+    Returns the user input provided.
+    """
     user_input = await ask_for_input("Listening:")
     return user_input
 
 
 async def take_command():
+    """
+    Asynchronously takes a command from the user.
+    """
     user_input = None
     #     if IS_LISTENING is None:
     #         IS_LISTENING = global_listening
@@ -211,11 +303,17 @@ async def take_command():
 
 
 def send_notification(title, message):
+    """
+    Send a notification using notify-send
+    """
     # Send a notification using notify-send
     start_process(["notify-send", title, message])
 
 
 def change_voice_model_command():
+    """
+    A function to change the voice model command. It prints the available voice models, takes user input for the model choice, and updates the global voice model variable if the chosen model is valid. It also handles the restarting of the Piper TTS server with the new voice model if applicable. Returns the updated voice model or prints an error message for an invalid choice.
+    """
     print("Choose voice model:")
     for choice, model in VOICE_MODELS.items():
         print(f"{choice}: {os.path.splitext(os.path.basename(model))[0]}")
@@ -237,6 +335,9 @@ def change_voice_model_command():
         print("Invalid choice. Please choose a number from the list.")
 
 def get_command(user_input):
+    """
+    A function to generate a command based on user input, with various conditional branches for different scenarios.
+    """
     sgpt_args = get_sgpt_args()
     jarvis_user_input = get_jarvis_prompt()
 
@@ -271,6 +372,10 @@ def get_command(user_input):
 
 
 def toggle_piper_http_server_command():
+    """
+    Function to toggle the Piper HTTP server command.
+    This function toggles the global variable PIPER_HTTP_SERVER, and depending on its value, either kills the Piper or starts the Piper TTS service.
+    """
     global PIPER_HTTP_SERVER
     if PIPER_HTTP_SERVER:
         PIPER_HTTP_SERVER = False
@@ -281,6 +386,9 @@ def toggle_piper_http_server_command():
 
 
 def toggle_vosk_websocket_server_command():
+    """
+    Toggles the Vosk websocket server command.
+    """
     global VOSK_WEBSOCKET_SERVER
     if VOSK_WEBSOCKET_SERVER:
         VOSK_WEBSOCKET_SERVER = False
