@@ -88,7 +88,7 @@ Follow these steps to install and set up the project:
 1. Clone the repository:
 
    ```
-   git clone https://github.com/akhil3417/gnu-linux-ai-voice-assistant
+   git clone https://github.com/akhil3417/glava
    ```
 
 2. Navigate to the project directory:
