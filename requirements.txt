@@ -17,3 +17,4 @@ psutil
 websockets
 IMDbPY
 virtualenv
+shell-gpt
