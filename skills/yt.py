@@ -10,7 +10,6 @@ import argparse  # to parse command-line arguments
 import os  # to execute media player
 import platform  # to check platform being used
 import re  # to find media URL from search results
-import readline  # for a more user-friendly prompt
 import shlex  # split args into strings
 import subprocess
 import sys  # to exit with error codes

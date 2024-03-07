@@ -3,13 +3,9 @@ import argparse
 import asyncio
 import os
 import socket
-from datetime import datetime
 
 import typer
 from pynput import keyboard
-from rich import print as rich_print
-from rich.prompt import Prompt
-from rich.rule import Rule
 from rich.console import Console
 
 # Import necessary modules
