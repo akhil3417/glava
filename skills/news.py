@@ -7,7 +7,14 @@ from config import NEWS_HEADLINES_NUMBER as headlines
 from utils.input_output import send_notification, speak_or_print
 
 
-def google_news_command(VOICE, headlines=10):
+def google_news_command(VOICE, headlines=headlines):
+    """
+    A function to fetch Google news headlines and read them out or print them.
+
+    :param VOICE: bool, whether to speak out the headlines or print them
+    :param headlines: int, the number of headlines to fetch, defaults to imported value
+    :return: None
+    """
     try:
         news_url = "https://news.google.com/news/rss"
         client = urllib.request.urlopen(news_url)
@@ -35,6 +42,9 @@ def google_news_command(VOICE, headlines=10):
 
 
 def get_news(user_input):
+    """
+    A function to get news based on user input. It takes a user_input parameter and returns a list of news articles.
+    """
     news = []
     url = "https://newsapi.org/v2/top-headlines"
     categories = [
@@ -86,6 +96,15 @@ def get_news(user_input):
 
 
 def read_news(user_input):
+    """
+    Fetch news based on the user input and provide options to speak or print the news, along with optional descriptions.
+
+    Args:
+        user_input: The user input to specify the news source and options for reading and displaying the news.
+
+    Returns:
+        None
+    """
     cmd = lambda text: print(text)  # Default command
     if "google" in user_input:
         if "speak" in user_input:
