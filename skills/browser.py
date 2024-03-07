@@ -59,7 +59,7 @@ def web_search(user_input):
     Return:
     - None
     """
-    for site_key, site_url in SITES.items():
+    for site_key in SITES.keys():
         if site_key in user_input:
             query_match = re.search(
                 r"for\s(.*?)\s*on", user_input
