@@ -104,7 +104,9 @@ Follow these steps to install and set up the project:
    ./installer.sh
    ```
 
-4. Note, the installer script only installs vosk-model-small-en-us-0.15 and en_US-hfc_female-medium models. To add your additional models, download them from [Piper](https://huggingface.co/rhasspy/piper-voices/tree/v1.0.0) or [Vosk](https://alphacephei.com/vosk/models) and extract them to `./extensions/piper/models/` or `./extensions/vosk` directory.
+4. Note, the installer script only installs vosk-model-small-en-us-0.15(voice_recognition) and en_US-hfc_female-medium(tts) models. To add your additional models, download them from [Piper](https://huggingface.co/rhasspy/piper-voices/tree/v1.0.0) , [Vosk](https://alphacephei.com/vosk/models) and extract them to `./extensions/piper/models/` or `./extensions/vosk` directory.
+
+You can listen to voice samples for Piper tts [here](https://rhasspy.github.io/piper-samples/) for piper , and download the preferred model accordingly.
 
 ## Usage
 
