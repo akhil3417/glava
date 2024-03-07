@@ -58,6 +58,7 @@ from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.shellgpt_check import shellgpt_check
 from utils.chat_history import show_chat_history
 from utils.greetings import greet_user
+from skills.image_generator import generate_image
 
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
@@ -149,6 +150,8 @@ async def handle_command(user_input):
         "ip address": ip_address_command_async,
         # aud & vid
         #
+        "generate image": generate_image,
+        "create image": generate_image,
         "play": stream_yt,
         "movie": movie_command,
         # "send an email": send_email_command,

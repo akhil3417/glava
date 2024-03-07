@@ -21,7 +21,7 @@ GLAVA is not just a tool for passing the Turing test, it's a dynamic command-lin
 
 Its is not just a tool for information retrieval. It's a companion, ready to assist you with a wide array of tasks, making your command-line experience more enjoyable and efficient.
 
-With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
+With its multimodal interaction, it can interact with you in a text or voice format. It can pull information from various sources, generate shell commands,images, and even browse the web. It's your go-to assistant for all your information and entertainment needs.
 
 
 ### Unleashing the Power of LLMs
@@ -66,6 +66,9 @@ GLAVA can play any song or video from YouTube sources, using yt-dlp, mpd, and mp
 
 GLAVA can query information about any movie from IMDb, providing you with a wealth of information about the movie, including its plot, cast, and ratings.
 
+### Generate Images
+
+GLAVA can help you generate images with text by using free services of  https://pollinations.ai/
 
 ## Installation
 
