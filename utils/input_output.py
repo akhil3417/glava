@@ -33,18 +33,27 @@ from .speech_recognition import start_listening
 
 
 def toggle_is_listening_command():
+    """
+    Toggles the IS_LISTENING global variable and prints its status.
+    """
     global IS_LISTENING
     IS_LISTENING = not IS_LISTENING
     print(f"Is Listening status: {IS_LISTENING}")
 
 
 def toggle_random_voice_command():
+    """
+    Toggles the global variable IS_RANDOM_VOICE to its opposite value and prints the new status.
+    """
     global IS_RANDOM_VOICE
     IS_RANDOM_VOICE = not IS_RANDOM_VOICE
     print(f"Random voice status: {IS_RANDOM_VOICE}")
 
 
 def toggle_voice_command():
+    """
+    Toggles the global_voice variable to its opposite value and prints the updated voice status.
+    """
     global global_voice
     global_voice = not global_voice
     print(f"Voice status: {global_voice}")
