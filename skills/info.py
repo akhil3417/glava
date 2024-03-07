@@ -8,6 +8,11 @@ from utils.input_output import speak_or_print, take_command
 
 
 def search_on_wikipedia(query):
+    """
+    Perform a search on Wikipedia using the given query and return a summary of the search results.
+    :param query: The search query for the Wikipedia search.
+    :return: A summary of the search results.
+    """
     try:
         results = wikipedia.summary(query, sentences=3)
         return results
@@ -18,6 +23,9 @@ def search_on_wikipedia(query):
 
 
 async def wikipedia_command_async():
+    """
+    Asynchronous function to perform a Wikipedia search based on user input.
+    """
     query = await take_command()  # Await take_command() here
     print(f"Searching on Wikipedia for", query)
     results = search_on_wikipedia(query).replace('"', "")
@@ -27,6 +35,9 @@ async def wikipedia_command_async():
 
 
 def movie_command():
+    """
+    A function to search for a movie in the IMDb database, retrieve its information, and present information using text ,tts to the user in a well formatted way.
+    """
     movies_db = imdb.IMDb()
     speak_or_print("Please tell me the movie name:")
     text = input().lower()
@@ -53,6 +64,15 @@ def movie_command():
 
 
 def calculate_wolframe(user_input):
+    """
+    Calculate the result of the user input using the Wolfram Alpha API.
+
+    Parameters:
+    user_input (str): The input provided by the user.
+
+    Returns:
+    None
+    """
     app_id = WOLFRAMALPHA_API
     client = wolframalpha.Client(app_id)
     result = client.query(user_input)
@@ -65,6 +85,13 @@ def calculate_wolframe(user_input):
 
 
 def what_is_wolframe(user_input):
+    """
+    Function to query the WolframAlpha API with a user input and retrieve the answer.
+    Parameters:
+        user_input (str): The input provided by the user.
+    Return:
+        None
+    """
     app_id = WOLFRAMALPHA_API
     client = wolframalpha.Client(app_id)
     # user_input=input("Enter:")
@@ -92,5 +119,10 @@ def what_is_wolframe(user_input):
 
 
 def run_wolframe(user_input):
+    """
+    Run the Wolframe with the given user input in a separate thread.
+
+    :param user_input: the input for the Wolframe
+    """
     t = threading.Thread(target=what_is_wolframe, args=(user_input,))
     t.start()
