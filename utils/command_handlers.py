@@ -15,6 +15,10 @@ from .input_output import (
 
 
 def is_command_safe(cmd):
+    """
+    A function to check if a command is safe to run, based on a list of unsafe patterns.
+    Takes a command as input and returns the cleaned output if safe, otherwise returns None.
+    """
     unsafe_patterns = [
         r"rm\s+-[rRf]",  # Remove command
         r";",  # Command separator
@@ -52,6 +56,13 @@ def is_command_safe(cmd):
 
 
 def remove_markdown_formatting(text):
+    """
+    Removes markdown formatting codes from the input text.
+    Parameters:
+    - text: str, the input text with markdown formatting codes.
+    Return:
+    - str, the input text with markdown formatting codes removed.
+    """
     # markdown_formatting_codes = r"(\*|\~|\`|\||\_|\#|\+|\-|\!|\[|\]|\(|\)|\.|\>|\<|\=)"
     markdown_formatting_codes = r"(\bash|\n|\`|\```|\*)"
     return re.sub(markdown_formatting_codes, "", text)
