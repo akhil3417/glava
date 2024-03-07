@@ -2,7 +2,7 @@ import subprocess
 from shutil import which
 from urllib.parse import urlparse, parse_qs
 
-from utils.input_output import speak_or_print, take_command
+from utils.input_output import speak_or_print, take_command, send_notification
 from .yt import get_media_url, play
 
 
@@ -61,6 +61,9 @@ def play_audio(user_input):
     if mpc is not None:
         subprocess.call([mpc, "play"])
 
+    # send notification
+    send_notification("Playing Audio", f"Playing audio from {media_url}")
+
 
 def play_video(user_input):
     """
@@ -74,6 +77,9 @@ def play_video(user_input):
     """
     media_url = get_media_url(user_input, 1)
     play(media_url, "-v")
+
+    # send notification
+    send_notification("Playing Video", f"Playing video from {media_url}")
 
 
 def stream_yt(user_input):
