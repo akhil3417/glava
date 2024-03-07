@@ -275,7 +275,7 @@ async def interactive_sgpt():
         )  # remove upperquotes
         if user_input.lower() == "exit":
             break
-        if user_input.lower() == "cls":
+        if user_input.lower() == "clear":
             os.system("clear")  # clear the console
         elif user_input.lower() == "v":
             # handle voice input with voice_sgpt
