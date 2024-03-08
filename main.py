@@ -55,7 +55,11 @@ from utils.chat_history import show_chat_history
 from utils.greetings import greet_user
 from skills.image_generator import generate_image
 
-from skills.voice_typing import toggle_nerd_dictation_command
+from skills.voice_typing import (
+    toggle_nerd_dictation_command,
+    start_nerd_dictation_command,
+    kill_nerd_dictation_command,
+)
 from utils.memory_consumption import tell_memory_consumption
 
 
@@ -164,6 +168,8 @@ async def handle_command(user_input):
         "votss": toggle_vosk_websocket_server_command,
         "toggle dictation": toggle_nerd_dictation_command,
         "start dictation": toggle_nerd_dictation_command,
+        "start writing": start_nerd_dictation_command,
+        "stop writing": kill_nerd_dictation_command,
     }
 
     for command, func in commands.items():

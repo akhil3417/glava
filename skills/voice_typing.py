@@ -8,22 +8,20 @@ from utils.input_output import start_process, send_notification
 from utils.services import get_pid, kill_process
 
 
-# Define the command
-nerd_dictation_command = [
-    NERD_DICTATION_BINARY,
-    "begin",
-    "--vosk-model-dir={}".format(NERD_DICTATION_MODEL),
-    "--numbers-as-digits",
-    "--numbers-use-separator",
-    "--numbers-min-value=10",
-    "--numbers-no-suffix",
-    "--punctuate-from-previous-timeout=0.5",
-    "--full-sentence",
-    "--config={}".format(NERD_DICTATION_SCRIPT),
-]
-
-
-def start_nerd_dictation_command(nerd_dictation_command):
+def start_nerd_dictation_command():
+    # Define the command
+    nerd_dictation_command = [
+        NERD_DICTATION_BINARY,
+        "begin",
+        "--vosk-model-dir={}".format(NERD_DICTATION_MODEL),
+        "--numbers-as-digits",
+        "--numbers-use-separator",
+        "--numbers-min-value=10",
+        "--numbers-no-suffix",
+        "--punctuate-from-previous-timeout=0.5",
+        "--full-sentence",
+        "--config={}".format(NERD_DICTATION_SCRIPT),
+    ]
     start_process(nerd_dictation_command)
     send_notification(
         "Voice Dictation Started",
