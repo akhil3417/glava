@@ -98,6 +98,17 @@ VOSK_MODEL = "vosk-model-small-en-us-0.15"
 # script arguments
 PIPER_SCRIPT_ARGS = f"--sentence_silence 0.2 --noise_scale 0.333 --noise_w 0.333 --length_scale 1.3 -m {voice_model}"
 
+## VOICE_DICTATION
+NERD_DICTATION_MODEL = os.path.abspath(
+    os.path.join(VOSK_MODELS_DIR, "vosk-model-en-us-0.22-lgraph")
+)  # Ensure it's an absolute path
+
+NERD_DICTATION_SCRIPT = os.path.join(BASE_DIR, "scripts/nerd-dictation.py")
+NERD_DICTATION_BINARY = os.path.join(
+    BASE_DIR, "extensions/nerd-dictation/nerd-dictation"
+)
+NERD_DICTATION = False
+
 
 STARTUP_MESSAGES = [
     "Cool, Im on it sir.",

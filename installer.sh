@@ -18,11 +18,18 @@ cp ./scripts/jarvis.json ~/.config/shell_gpt/roles/
 mkdir -p ./extensions/vosk
 mkdir -p ./extensions/piper
 mkdir -p ./extensions/piper/models
+mkdir -p ./extensions/nerd-dictation/
 
 # Download Vosk model
 if [ ! -f ./extensions/vosk/vosk-model-small-en-us-0.15.zip ]; then
     wget -O ./extensions/vosk/vosk-model-small-en-us-0.15.zip "https://alphacephei.com/vosk/models/vosk-model-small-en-us-0.15.zip"
     unzip ./extensions/vosk/vosk-model-small-en-us-0.15.zip -d ./extensions/vosk
+fi
+
+# Download nerd-dictation
+if [ ! -f ./extensions/nerd-dictation/ ]; then
+    wget -O ./extensions/nerd-dictation/main.zip "https://github.com/ideasman42/nerd-dictation/archive/refs/heads/main.zip"
+    unzip -j -d ./extensions/nerd-dictation/ ./extensions/nerd-dictation/main.zip
 fi
 
 # Download Piper
@@ -42,4 +49,5 @@ fi
 
 # Make necessary files executable
 chmod +x ./extensions/piper/piper
+chmod +x ./extensions/nerd-dictation/nerd-dictation
 chmod +x ./start.sh

@@ -6,6 +6,7 @@ The main components of the Assistant are :
 - [Vosk](https://alphacephei.com/vosk/) - An open-source speech recognition toolkit.
 - [Piper](https://github.com/rhasspy/piper) - A fast, local neural text to speech system that sounds great.
 - [Shellgpt](https://github.com/TheR1D/shell_gpt) - A command-line productivity tool powered by AI large language models (LLM).
+- [Nerd-Dictation](https://github.com/ideasman42/nerd-dictation) - This is a utility that provides simple access speech to text for using in Linux without being tied to a desktop environment, using the excellent VOSK-API.
 
 ## Table of Contents
 1. [Description](#description)
@@ -39,6 +40,10 @@ For voice recognition, we use [Vosk](https://alphacephei.com/vosk/), a free. lig
 For your ears to be satisfied, GLAVA is not just a talker, it's a master of Text-to-Speech (TTS). It uses Piper, a powerful tool that can be used with HTTP websockets, where text is curled to get voice, or by using the Piper binary.
 
 Listen to voice samples [here](https://rhasspy.github.io/piper-samples/)
+
+### Offline Voice Dictation
+
+Using the Nerd Dictation for very accurate speech to text typing.(uses [Vosk-Api](https://github.com/alphacep/vosk-api))
 
 ### Wolfram Alpha 
 
