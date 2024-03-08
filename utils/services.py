@@ -9,7 +9,7 @@ from config import (
 )
 
 
-def start_piper_tts_service():
+def start_piper_tts_service(voice_model):
     """
     Start Piper TTS service.
     """

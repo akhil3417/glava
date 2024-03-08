@@ -314,12 +314,12 @@ def change_voice_model_command():
     """
     A function to change the voice model command. It prints the available voice models, takes user input for the model choice, and updates the global voice model variable if the chosen model is valid. It also handles the restarting of the Piper TTS server with the new voice model if applicable. Returns the updated voice model or prints an error message for an invalid choice.
     """
+    global voice_model  # Declare that the voice_model variable will be used globally
     print("Choose voice model:")
     for choice, model in VOICE_MODELS.items():
         print(f"{choice}: {os.path.splitext(os.path.basename(model))[0]}")
     model_choice = input("Enter your choice: ")
     if model_choice in VOICE_MODELS:
-        global voice_model
         if (
             voice_model != VOICE_MODELS[model_choice]
         ):  # Check if the voice model has changed
@@ -329,7 +329,9 @@ def change_voice_model_command():
                     f"Killing and Restarting Piper Tts server with {voice_model} model."
                 )
                 kill_piper()
-                start_piper_tts_service()  # Start the service with the new voice model
+                start_piper_tts_service(
+                    voice_model
+                )  # Start the service with the new voice model
             return voice_model
     else:
         print("Invalid choice. Please choose a number from the list.")

@@ -258,7 +258,7 @@ shellgpt_check()
 
 # start piper
 if PIPER_HTTP_SERVER:
-    start_piper_tts_service()
+    start_piper_tts_service(voice_model)
 
 
 async def interactive_sgpt():
