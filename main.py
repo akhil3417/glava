@@ -49,15 +49,16 @@ from utils.input_output import (
     toggle_voice_command,
     toggle_vosk_websocket_server_command,
 )
-from utils.memory_consumption import tell_memory_consumption
 from utils.services import start_piper_tts_service, start_vosk_service_command
 from utils.shellgpt_check import shellgpt_check
 from utils.chat_history import show_chat_history
 from utils.greetings import greet_user
 from skills.image_generator import generate_image
 
-# from skills.voice_typing import run_nerd_dictation, nerd_dictation_command
 from skills.voice_typing import toggle_nerd_dictation_command
+from utils.memory_consumption import tell_memory_consumption
+
+
 # Parse command-line arguments
 parser = argparse.ArgumentParser(description="Interactive SGPT.")
 parser.add_argument("--model", type=str, default="2", help="Voice model to use")

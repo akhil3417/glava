@@ -1,7 +1,6 @@
 import subprocess, os
 from config import (
     PIPER_HTTP_SERVER_SCRIPT,
-    voice_model,
     VOSK_WEBSOCKET_SCRIPT,
     VOSK_MODELS_DIR,
     VOSK_MODEL,

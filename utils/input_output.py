@@ -28,6 +28,7 @@ from .services import (
     start_piper_tts_service,
     kill_aplay_processes,
     is_aplay_running,
+    start_vosk_service_command,
 )
 from .speech_recognition import start_listening
 
@@ -384,7 +385,7 @@ def toggle_piper_http_server_command():
         kill_piper()
     else:
         PIPER_HTTP_SERVER = True
-        start_piper_tts_service()  # Start the PIPER_HTTP_SERVER
+        start_piper_tts_service(voice_model)  # Start the PIPER_HTTP_SERVER
 
 
 def toggle_vosk_websocket_server_command():
@@ -397,4 +398,4 @@ def toggle_vosk_websocket_server_command():
         kill_vosk()
     else:
         VOSK_WEBSOCKET_SERVER = True
-        start_piper_tts_service()  # Start the VOSK_WEBSOCKET_SERVER
+        start_vosk_service_command()  # Start the VOSK_WEBSOCKET_SERVER
