@@ -162,6 +162,7 @@ async def handle_command(user_input):
         # assistant controls
         "modelv": change_voice_model_command,
         "vcc": toggle_voice_command,
+        "stop speaking": toggle_voice_command,
         "tll": toggle_is_listening_command,
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
