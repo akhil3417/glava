@@ -4,6 +4,7 @@ import os
 import random
 import subprocess
 import threading
+import time
 
 from config import (
     IS_LISTENING,
@@ -337,6 +338,7 @@ def change_voice_model_command():
     else:
         print("Invalid choice. Please choose a number from the list.")
 
+
 def get_command(user_input):
     """
     A function to generate a command based on user input, with various conditional branches for different scenarios.
@@ -345,22 +347,21 @@ def get_command(user_input):
     jarvis_user_input = get_jarvis_prompt()
 
     if PIPER_HTTP_SERVER:
-        command = f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'| tee /dev/tty"
-        if global_voice and SCREEN_PRINT:
-            sgpt_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            output = sgpt_process.communicate()[0].decode().strip().replace("'", "")
-            curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
-            start_process(curl_command, shell=True)
-            return
-        elif global_voice and not SCREEN_PRINT:
-            command = command.split("|")[0]
-            sgpt_process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
-            output = sgpt_process.communicate()[0].decode().strip().replace("'", "")
-            curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
-            start_process(curl_command, shell=True)
-            return
-        else:
-            start_process(command, shell=True)
+       command = f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'"
+       if global_voice and not SCREEN_PRINT:
+          with subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, universal_newlines=True) as sgpt_process:
+              for line in sgpt_process.stdout:
+                output = line.strip().replace("'", "")
+                curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
+          subprocess.run(curl_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+       elif global_voice:
+          command = f"{command} |tee /dev/tty "
+          with subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, universal_newlines=True) as sgpt_process:
+              for line in sgpt_process.stdout:
+                output = line.strip().replace("'", "")
+                curl_command = f"curl -G --data-urlencode 'text={output}' 'localhost:5000' 2>/dev/null| aplay -r 22050 -f S16_LE -t raw - 2>/dev/null"
+                subprocess.run(curl_command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                time.sleep(0.1) # fixes wierd click at end
     else:
         if global_voice and SCREEN_PRINT:
             audio_stream = get_audio_stream()
@@ -371,7 +372,7 @@ def get_command(user_input):
                 f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}' | {audio_stream} "
             )
         else:
-            return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'"
+            return f"sgpt {sgpt_args} '{jarvis_user_input} {user_input}'| tee /dev/tty "
 
 
 def toggle_piper_http_server_command():
