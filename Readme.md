@@ -43,7 +43,9 @@ Listen to voice samples [here](https://rhasspy.github.io/piper-samples/)
 
 ### Offline Voice Dictation
 
-Using the Nerd Dictation for very accurate speech to text typing.(uses [Vosk-Api](https://github.com/alphacep/vosk-api))
+GLAVA can do speech to text typing ,using the Nerd Dictation which is  very accurate and can be easily customized with python scripts which act as config .(uses [Vosk-Api](https://github.com/alphacep/vosk-api))
+
+[Here](https://github.com/akhil3417/glava/blob/master/scripts/nerd-dictation.py) is the config that this project uses which enable , "start writing" , "stop writing" commands for enabling/Disabling voice Dictation , along with few punctuations , word capitalisation etc.
 
 ### Wolfram Alpha 
 
