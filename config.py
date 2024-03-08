@@ -35,6 +35,7 @@ WOLFRAMALPHA_API = config["API_KEYS"]["wolframalpha_api"]
 
 
 # Assistant Settings and services
+PIPER_VOICE_MODEL = config["ASSISTANT_SETTINGS"]["voice_model"]
 IS_LISTENING = config["ASSISTANT_SETTINGS"].getboolean("is_listening")
 SCREEN_PRINT = config["ASSISTANT_SETTINGS"].getboolean("screen_print")
 VOICE = config["ASSISTANT_SETTINGS"].getboolean("voice")
@@ -81,7 +82,7 @@ SPEAKER_IDS = {
 }
 
 # Voice model and Piper executable
-voice_model = VOICE_MODELS.get("3")
+voice_model = VOICE_MODELS.get(PIPER_VOICE_MODEL)
 PIPER_EXECUTABLE = os.path.join(
     os.path.abspath(os.path.join(BASE_DIR, "extensions/piper/")), "piper"
 )
