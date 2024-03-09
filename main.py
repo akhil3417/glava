@@ -234,6 +234,8 @@ async def voice_sgpt(IS_LISTENING):
             listen_task = await start_listening("ws://localhost:2700", IS_LISTENING)
             await listen_task
             user_input = get_transcript()
+            if "start writing" in get_transcript():
+                break
             if "stop listening" in get_transcript():
                 break
             await handle_command(user_input)
