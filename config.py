@@ -43,6 +43,7 @@ PIPER_HTTP_SERVER = config["ASSISTANT_SETTINGS"].getboolean("piper_http_server")
 VOSK_WEBSOCKET_SERVER = config["ASSISTANT_SETTINGS"].getboolean("vosk_websocket_server")
 IS_RANDOM_VOICE = config["ASSISTANT_SETTINGS"].getboolean("is_random_voice")
 SHOW_CHAT_HISTORY = config["ASSISTANT_SETTINGS"].getboolean("show_chat_history")
+IS_VOICE_DICTATION = config["ASSISTANT_SETTINGS"].getboolean("voice_dictation")
 
 # Other settings
 NEWS_HEADLINES_NUMBER = int(config["OTHER_SETTINGS"]["news_headlines_number"])

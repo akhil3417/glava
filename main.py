@@ -56,9 +56,10 @@ from utils.greetings import greet_user
 from skills.image_generator import generate_image
 
 from skills.voice_typing import (
-    toggle_nerd_dictation_command,
+    init_nerd_dictation_command,
     start_nerd_dictation_command,
     kill_nerd_dictation_command,
+    suspend_nerd_dictation_command,
 )
 from utils.memory_consumption import tell_memory_consumption
 
@@ -167,10 +168,9 @@ async def handle_command(user_input):
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
         "votss": toggle_vosk_websocket_server_command,
-        "toggle dictation": toggle_nerd_dictation_command,
-        "start dictation": toggle_nerd_dictation_command,
         "start writing": start_nerd_dictation_command,
-        "stop writing": kill_nerd_dictation_command,
+        "stop writing": suspend_nerd_dictation_command,
+        "kill dictation": kill_nerd_dictation_command,
     }
 
     for command, func in commands.items():
@@ -271,6 +271,9 @@ shellgpt_check()
 # start piper
 if PIPER_HTTP_SERVER:
     start_piper_tts_service(voice_model)
+
+# start nerd-dictation and suspend it , if IS_VOICE_DICTATION=true
+init_nerd_dictation_command()
 
 
 async def interactive_sgpt():

@@ -2,12 +2,13 @@ from config import (
     NERD_DICTATION_MODEL,
     NERD_DICTATION_SCRIPT,
     NERD_DICTATION_BINARY,
-    NERD_DICTATION,
+    IS_VOICE_DICTATION,
 )
 from utils.input_output import start_process, send_notification
+from utils.services import get_pid
 
 
-def start_nerd_dictation_command():
+def run_nerd_dictation_command():
     # Define the command
     nerd_dictation_command = [
         NERD_DICTATION_BINARY,
@@ -28,16 +29,30 @@ def start_nerd_dictation_command():
     )
 
 
+def resume_nerd_dictation_command():
+    start_process([NERD_DICTATION_BINARY, "resume"])
+    send_notification("Voice Dictation Resumed", "")
+
+
+def suspend_nerd_dictation_command():
+    start_process([NERD_DICTATION_BINARY, "suspend"])
+    send_notification("Voice Dictation Suspended", "")
+
+
+def init_nerd_dictation_command():
+    if IS_VOICE_DICTATION:
+        start_nerd_dictation_command()
+        suspend_nerd_dictation_command()
+
+
 def kill_nerd_dictation_command():
     start_process([NERD_DICTATION_BINARY, "end"])
     send_notification("Voice Dictation Killed", "")
 
 
-def toggle_nerd_dictation_command():
-    global NERD_DICTATION
-    if NERD_DICTATION:
-        NERD_DICTATION = False
-        kill_nerd_dictation_command()
+def start_nerd_dictation_command():
+    pid = get_pid(NERD_DICTATION_BINARY)
+    if pid:
+        resume_nerd_dictation_command()
     else:
-        NERD_DICTATION = True
-        start_nerd_dictation_command()  # Start the Nerd Dictation.
+        run_nerd_dictation_command()
