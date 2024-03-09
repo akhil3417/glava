@@ -1,12 +1,13 @@
 # Project Name: Gnu/Linux-ai-voice-assistant(GLAVA)
 
-Gnu/Linux-ai-voice-assistant is a versatile interface that utilizes various open source tools, offering a seamless interaction with a llms, a variety of services and features.
+Gnu/Linux-ai-voice-assistant is a versatile terminal based interface that utilizes various open source tools, offering a seamless interaction with a llms, a variety of services and features.
 The main components of the Assistant are :
 
 - [Vosk](https://alphacephei.com/vosk/) - An open-source speech recognition toolkit.
 - [Piper](https://github.com/rhasspy/piper) - A fast, local neural text to speech system that sounds great.
 - [Shellgpt](https://github.com/TheR1D/shell_gpt) - A command-line productivity tool powered by AI large language models (LLM).
 - [Nerd-Dictation](https://github.com/ideasman42/nerd-dictation) - This is a utility that provides simple access speech to text for using in Linux without being tied to a desktop environment, using the excellent VOSK-API.
+
 
 ## Table of Contents
 1. [Description](#description)
