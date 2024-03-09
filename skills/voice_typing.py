@@ -8,7 +8,7 @@ from utils.input_output import start_process, send_notification
 from utils.services import get_pid
 
 
-def run_nerd_dictation_command():
+def start_nerd_dictation_command():
     # Define the command
     nerd_dictation_command = [
         NERD_DICTATION_BINARY,
@@ -50,9 +50,10 @@ def kill_nerd_dictation_command():
     send_notification("Voice Dictation Killed", "")
 
 
-def start_nerd_dictation_command():
+def manage_nerd_dictation_command():
     pid = get_pid(NERD_DICTATION_BINARY)
-    if pid:
+
+    if pid and pid.isdigit():  # Check if PID is a valid number
         resume_nerd_dictation_command()
     else:
-        run_nerd_dictation_command()
+        start_nerd_dictation_command()

@@ -21,11 +21,24 @@ def start_piper_tts_service(voice_model):
     )
 
 
+# def get_pid(name):
+#     """
+#     This function takes a process name as input and returns the process ID (PID) of the given process name.
+#     """
+#     return subprocess.check_output(["pgrep", "-f", name])
+
+
 def get_pid(name):
     """
     This function takes a process name as input and returns the process ID (PID) of the given process name.
     """
-    return subprocess.check_output(["pgrep", "-f", name])
+    try:
+        pid = subprocess.check_output(["pgrep", "-f", name])
+        return pid.decode(
+            "utf-8"
+        ).strip()  # Convert bytes to string and remove any whitespace
+    except subprocess.CalledProcessError:
+        return None
 
 
 def kill_process(pid):
@@ -48,12 +61,12 @@ def kill_piper():
     """
     global PIPER_HTTP_SERVER_SCRIPT
     pid = get_pid(PIPER_HTTP_SERVER_SCRIPT)
-    pid_str = pid.decode(
-        "utf-8"
-    ).strip()  # Convert bytes to string and remove any whitespace
-    pids = pid_str.split("\n")
+    if pid is None:  # check if the process was found
+        print("Piper HTTP server is not running.")
+        return
+    pids = pid.split("\n")  # split by newline
     for pid in pids:
-        kill_process(pid)
+        kill_process(int(pid))  # convert PID to integer before killing
     print(f"Killed Piper Http Server with Pids {pids}")
 
 
@@ -65,10 +78,10 @@ def kill_vosk():
     """
     global VOSK_WEBSOCKET_SCRIPT
     pid = get_pid(VOSK_WEBSOCKET_SCRIPT)
-    pid_str = pid.decode(
-        "utf-8"
-    ).strip()  # Convert bytes to string and remove any whitespace
-    pids = pid_str.split("\n")
+    if pid is None:  # check if the process was found
+        print("Vosk server is not running.")
+        return
+    pids = pid.split("\n")  # split by newline
     for pid in pids:
         kill_process(pid)
     print(f"Killed Vosk Websocket Server with Pids {pids}")
@@ -109,8 +122,11 @@ def kill_aplay_processes():
     Kill aplay processes by getting their PIDs and killing each process.
     """
     try:
-        pids = get_pid("aplay").splitlines()
+        pid = get_pid("aplay")
+        if pid is None:  # check if the process was found
+            return
+        pids = pid.split("\n")  # split by newline
         for pid in pids:
-            kill_process(pid.decode().strip())
+            kill_process(int(pid))
     except subprocess.CalledProcessError:
         pass

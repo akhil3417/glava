@@ -57,7 +57,7 @@ from skills.image_generator import generate_image
 
 from skills.voice_typing import (
     init_nerd_dictation_command,
-    start_nerd_dictation_command,
+    manage_nerd_dictation_command,
     kill_nerd_dictation_command,
     suspend_nerd_dictation_command,
 )
@@ -168,7 +168,7 @@ async def handle_command(user_input):
         "rvt": toggle_random_voice_command,
         "pipt": toggle_piper_http_server_command,
         "votss": toggle_vosk_websocket_server_command,
-        "start writing": start_nerd_dictation_command,
+        "start writing": manage_nerd_dictation_command,
         "stop writing": suspend_nerd_dictation_command,
         "kill dictation": kill_nerd_dictation_command,
     }
