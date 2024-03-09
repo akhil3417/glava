@@ -16,7 +16,6 @@ def start_piper_tts_service(voice_model):
     print(
         f"Starting Piper Http Server on Port 5000 with Default '{os.path.basename(voice_model)}' voice model"
     )
-    # start_process(command,shell=True)
     subprocess.Popen(
         command, shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT
     )
