@@ -5,7 +5,6 @@ from config import (
     NERD_DICTATION,
 )
 from utils.input_output import start_process, send_notification
-from utils.services import get_pid, kill_process
 
 
 def start_nerd_dictation_command():
@@ -30,18 +29,8 @@ def start_nerd_dictation_command():
 
 
 def kill_nerd_dictation_command():
-    global NERD_DICTATION_SCRIPT
-    pid = get_pid(NERD_DICTATION_SCRIPT)
-    pid_str = pid.decode(
-        "utf-8"
-    ).strip()  # Convert bytes to string and remove any whitespace
-    pids = pid_str.split("\n")
-    for pid in pids:
-        kill_process(pid)
-    print(f"Killed Nerd Dictation Process with Pid {pids}")
-    send_notification(
-        f"Voice Dictation Stopped", f"Killed Nerd Dictation Process with Pid {pids}"
-    )
+    start_process([NERD_DICTATION_BINARY, "end"])
+    send_notification("Voice Dictation Killed", "")
 
 
 def toggle_nerd_dictation_command():
@@ -51,6 +40,4 @@ def toggle_nerd_dictation_command():
         kill_nerd_dictation_command()
     else:
         NERD_DICTATION = True
-        start_nerd_dictation_command(
-            nerd_dictation_command
-        )  # Start the Nerd Dictation.
+        start_nerd_dictation_command()  # Start the Nerd Dictation.
