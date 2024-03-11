@@ -282,6 +282,8 @@ async def interactive_sgpt():
     if SHOW_CHAT_HISTORY:
         show_chat_history("jarvis")  # print the chat history when the program starts
     greet_user(USER, HOSTNAME)
+    # memory usage
+    tell_memory_consumption()
     while True:
         user_input = typer.prompt(">>>", prompt_suffix=" ").replace(
             "'", ""

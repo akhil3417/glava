@@ -109,7 +109,6 @@ NERD_DICTATION_SCRIPT = os.path.join(BASE_DIR, "scripts/nerd-dictation.py")
 NERD_DICTATION_BINARY = os.path.join(
     BASE_DIR, "extensions/nerd-dictation/nerd-dictation"
 )
-NERD_DICTATION = False
 
 
 STARTUP_MESSAGES = [
