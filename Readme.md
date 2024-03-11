@@ -158,6 +158,11 @@ If you'd like to contribute to this project, please adhere to the following guid
 
 This Project is in early development so bugs are expected and will be fixed in future .
 
+## Additional Resources
+Here a few more tools ,based on vosk.
+- https://git.sr.ht/~geb/sprec
+- https://git.sr.ht/~geb/numen
+
 ## License
 
 This project is licensed under the MIT License. For more details, please refer to the [LICENSE.md](LICENSE.md) file in the repository.
