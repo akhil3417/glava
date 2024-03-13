@@ -162,6 +162,7 @@ This Project is in early development so bugs are expected and will be fixed in f
 Here a few more tools ,based on vosk.
 - https://git.sr.ht/~geb/sprec
 - https://git.sr.ht/~geb/numen
+- https://k2-fsa.github.io/sherpa/onnx/tts/apk-engine.html
 
 ## License
 
